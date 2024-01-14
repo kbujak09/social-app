@@ -1,0 +1,58 @@
+@import '../../../vars.scss';
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  88% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.container {
+  display: flex; 
+  flex-direction: column;
+  gap: 32px;
+}
+.text {
+  font-size: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(45, end);
+}
+.text, .text > strong {
+  letter-spacing: 1px;
+  word-spacing: 2px;
+}
+.text > strong {
+  color: $logo;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  animation: appear 2s ease-in;
+  cursor: pointer;
+}
+.login, .register {
+  font-size: 18px;
+  padding: 8px 24px;
+  border-radius: 5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: 2px solid $logo;
+}
+.login:hover, .register:hover {
+  background-color: $logo;
+}

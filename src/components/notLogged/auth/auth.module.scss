@@ -1,0 +1,57 @@
+@import './../../../vars.scss';
+
+.formCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 28px 0;
+}
+.input {
+  height: 36px;
+  border-radius: 20px;
+  border: 0;
+  width: 220px;  
+  border: 2px solid transparent;
+  font-size: 14px;
+  padding: 0 16px;
+  color: $bg-main;
+  letter-spacing: 0.5px;
+}
+.input:focus {
+  border: 2px solid $logo;
+  outline: 0;
+}
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+.submit {
+  text-align: center;
+}
+.submit > input {
+  background-color: $logo;
+  border: 0;
+  padding: 12px 24px;
+  border-radius: 20px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+}
+.question {
+  text-align: center;
+  font-size: 14px;
+  margin: 24px 0;
+  letter-spacing: 0.5px;
+}
+.question > strong {
+  cursor: pointer;
+}
