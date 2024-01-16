@@ -2,8 +2,6 @@
 
 .container {
   box-sizing: border-box;
-  background-color: $bg-main;
-  color: $font-main;
   height: 100svh;
   overflow: hidden;
   display: flex;
@@ -11,4 +9,5 @@
   align-items: center;
   justify-content: space-between;
   padding: 24px 0;
+  position: relative;
 }
