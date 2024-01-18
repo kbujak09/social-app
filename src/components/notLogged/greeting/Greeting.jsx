@@ -12,7 +12,7 @@ const Greeting = () => {
       </div>
       <div className={styles.buttons}>
         <div onClick={() => navigate('/login')} className={styles.login}>Log in</div>
-        or
+        <div className={styles.or}>or</div>
         <div onClick={() => navigate('/signup')} className={styles.register}>Sign up</div>
       </div>
     </div>

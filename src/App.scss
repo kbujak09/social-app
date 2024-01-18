@@ -11,7 +11,10 @@ body {
   background-color: $bg-main;
   color: $font-main;
 }
-
+#root {
+  display: flex;
+  justify-content: center;
+}
 * {
   color: $font-main;
   }

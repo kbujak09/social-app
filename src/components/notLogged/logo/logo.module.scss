@@ -5,3 +5,9 @@
 .logo > img {
   width: 100%;
 }
+
+@media (min-width: 1200px) {
+  .logo {
+    width: 220px;
+  }
+}

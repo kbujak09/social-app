@@ -56,3 +56,19 @@
 .login:hover, .register:hover {
   background-color: $logo;
 }
+
+@media (min-width: 1200px) {
+  .text {
+    font-size: 28px;
+  }
+  .login, .register {
+    font-size: 20px;
+    padding: 10px 28px;
+  }
+  .buttons {
+    gap: 24px;
+  }
+  .or {
+    font-size: 20px;
+  }
+}

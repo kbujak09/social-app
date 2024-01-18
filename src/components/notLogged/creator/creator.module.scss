@@ -4,3 +4,9 @@
   letter-spacing: 0.5px;
   line-height: 28px;
 }
+
+@media (min-width: 1200px) {
+  .creator {
+    font-size: 16px;
+  }
+}

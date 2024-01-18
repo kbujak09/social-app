@@ -1,5 +1,27 @@
 @import './../../../vars.scss';
 
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px)
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
 .formCell {
   display: flex;
   flex-direction: column;
@@ -14,8 +36,8 @@
 .input {
   height: 36px;
   border-radius: 20px;
-  border: 0;
-  width: 220px;  
+  border: 0;  
+  width: 220px;
   border: 2px solid transparent;
   font-size: 14px;
   padding: 0 16px;
@@ -67,23 +89,27 @@
   animation: shake 0.3s ease-in-out
 }
 
-@keyframes shake {
-  0% {
-    transform: translateX(0);
+@media (min-width: 1200px) {
+  .title {
+    font-size: 28px;
   }
-  20% {
-    transform: translateX(-2px);
+  .form {
+    gap: 32px;
+    padding: 32px 0;
   }
-  40% {
-    transform: translateX(2px)
+  .input {
+    width: 420px;
+    text-align: center;
+    font-size: 18px;
+    padding: 4px 0;
+    border-radius: 32px;
   }
-  60% {
-    transform: translateX(-2px);
+  .submit > input {
+    font-size: 18px;
+    padding: 16px 0;
+    border-radius: 32px;
   }
-  80% {
-    transform: translateX(2px);
-  }
-  100% {
-    transform: translateX(0);
+  .question {
+    font-size: 16px;
   }
 }
