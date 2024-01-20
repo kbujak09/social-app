@@ -31,6 +31,8 @@ const Login = () => {
       if (req.status === 200) {
         localStorage.setItem('token', json.token);
         localStorage.setItem('username', json.user.username);
+        localStorage.setItem('avatar', json.user.avatar);
+        console.log(json.user.avatar)
         localStorage.setItem('id', json.user._id);
         setUser(json.token);
         setUsername('');
@@ -55,9 +57,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <div className={styles.container}>
-      <div className={`${styles.message} ${isShaking ? styles.shake : null}`}>{message}</div>
       <div className={styles.title}>Log in</div>
-      <hr />
       <form onSubmit={(e) => {logIn(e); setIsShaking(true); turnOffShake()}} id='login' className={styles.form}>
         <div className={styles.formCell}>
           <label className={styles.label} htmlFor="login-username"></label>
@@ -74,6 +74,7 @@ const Login = () => {
       <div className={styles.question}>
         Don't have an account? <strong onClick={() => navigate('/signup')}>Sign up</strong>
       </div>
+      <div className={`${styles.message} ${isShaking ? styles.shake : null}`}>{message}</div>
     </div>
     </div>
   )

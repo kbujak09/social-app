@@ -1,4 +1,5 @@
 import styles from './content.module.scss';
+import Header from './header/Header';
 
 const Content = () => {
 
@@ -8,7 +9,10 @@ const Content = () => {
   }
 
   return (
-    <div onClick={logOut}>log out</div>
+    <div className={styles.container}>
+      <Header />
+      <div onClick={logOut}>log out</div>
+    </div>
   )
 }
 

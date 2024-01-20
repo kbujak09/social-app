@@ -55,9 +55,7 @@ const Register = () => {
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.message} ${isShaking ? styles.shake : null}`}>{message}</div>
       <div className={styles.title}>Sign up</div>
-      <hr />
       <form onSubmit={(e) => {signUp(e); setIsShaking(true); turnOffShake()}} id='register' className={styles.form}>
         <div className={styles.formCell}>
           <label className={styles.label} htmlFor="register-username"></label>
@@ -78,6 +76,7 @@ const Register = () => {
       <div className={styles.question}>
         Already have an account? <strong onClick={() => navigate('/login')}>Log in</strong>
       </div>
+      <div className={`${styles.message} ${isShaking ? styles.shake : null}`}>{message}</div>
     </div>
   )
 };
