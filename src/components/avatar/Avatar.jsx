@@ -22,10 +22,15 @@ const Avatar = ({id}) => {
     avatar8
   ]
 
+  if (id) {
+    return (
+      <div className={styles.container}>
+        <img src={avatars[id.slice(-1) - 1]} alt="avatar" />
+      </div>
+    )
+  }
   return (
-    <div className={styles.container}>
-      <img src={avatars[id.slice(-1) - 1]} alt="avatar" />
-    </div>
+    null
   )
 }
 

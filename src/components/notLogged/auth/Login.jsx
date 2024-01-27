@@ -1,7 +1,8 @@
 import styles from './auth.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { useState, useContext } from 'react';
-import { LoginContext } from '../../../contexts/LoginContext';
+import { useState, useContext, useEffect } from 'react';
+import { LoginContext } from '../../../contexts/context';
+
 
 const Login = () => {
 
@@ -17,7 +18,7 @@ const Login = () => {
   const logIn = async (e) => {
     e.preventDefault();
     try {
-      let req = await fetch('http://localhost:5000/api/login', {
+      let req = await fetch('http://192.168.0.19:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -32,8 +33,6 @@ const Login = () => {
         localStorage.setItem('token', json.token);
         localStorage.setItem('username', json.user.username);
         localStorage.setItem('avatar', json.user.avatar);
-        console.log(json.user.avatar)
-        localStorage.setItem('id', json.user._id);
         setUser(json.token);
         setUsername('');
         setPassword('');

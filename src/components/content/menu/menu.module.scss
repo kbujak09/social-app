@@ -1,0 +1,38 @@
+@import '../../../vars.scss';
+
+.bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+}
+@keyframes slideIn {
+  0% {
+    right: -40vw;
+  }
+  100% {
+    right: 0;
+  }
+}
+.content {
+  animation: slideIn 0.8s ease-in-out;
+  background-color: $bg-main;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  padding: 36px 24px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.button {
+  padding: 0 24px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LoginContext } from './contexts/LoginContext';
+import { LoginContext } from './contexts/context';
 import NotLogged from './components/notLogged/NotLogged'
 import Content from './components/content/Content';
 import './App.scss';                                    
@@ -22,4 +22,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
