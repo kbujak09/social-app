@@ -16,7 +16,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      let req = await fetch('http://192.168.0.19:5000/api/signup', {
+      let req = await fetch('http://192.168.0.26:5000/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
