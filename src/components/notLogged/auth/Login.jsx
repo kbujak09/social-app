@@ -18,7 +18,7 @@ const Login = () => {
   const logIn = async (e) => {
     e.preventDefault();
     try {
-      let req = await fetch('http://192.168.0.26:5000/api/login', {
+      let req = await fetch('http://192.168.0.19:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

@@ -1,3 +1,5 @@
+@import '../../../vars.scss';
+
 .container {
   width: 100%;
   position: fixed;
@@ -6,8 +8,6 @@
   display: flex;
   justify-content: space-around;
   gap: 24px;
-  padding-bottom: 16px;
-}
-.button > img {
-  width: 36px;
+  padding: 12px 0;
+  border-top: 1px solid $font-main;
 }

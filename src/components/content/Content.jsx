@@ -8,12 +8,14 @@ import Nav from './nav/Nav';
 const Content = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [chosen, setChosen] = useState('home');
 
   return (
     <div className={styles.container}>
       <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
       {isMenuOpen ? <Menu setIsMenuOpen={setIsMenuOpen}/> : null}
-      <Nav />
+
+      <Nav chosen={chosen} setChosen={setChosen}/>
     </div>
   )
 }
