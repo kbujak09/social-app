@@ -9,5 +9,16 @@
   justify-content: space-around;
   gap: 24px;
   padding: 12px 0;
-  border-top: 1px solid $font-main;
+  border-top: 1px solid $logo;
 }
+  .icon {
+    width: 36px;
+    filter: brightness(0) saturate(100%) invert(87%) sepia(3%) saturate(285%) hue-rotate(182deg) brightness(109%) contrast(83%);
+  }
+  .iconChosen {
+    width: 36px;
+    filter: brightness(0) saturate(100%) invert(46%) sepia(60%) saturate(3544%) hue-rotate(200deg) brightness(94%) contrast(89%);
+  }
+  .icon > img, .iconChosen > img {
+    width: 100%;
+  }
