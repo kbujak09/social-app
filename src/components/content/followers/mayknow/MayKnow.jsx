@@ -23,7 +23,7 @@ const MayKnow = () => {
   }
 
   return (
-    data && data.length > 0 && <div className={styles.container}>
+    data && <div className={styles.container}>
       <div className={styles.title}>People you may know</div>
       <hr className={styles.hr}/>
       {data.length > 0 && data.map(item => {
