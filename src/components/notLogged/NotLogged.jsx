@@ -2,23 +2,40 @@ import styles from './notLogged.module.scss'
 import Greeting from './greeting/Greeting';
 import Logo from './logo/Logo';
 import Creator from './creator/Creator';
-import {Routes, Route} from 'react-router-dom';
 import Login from './auth/Login';
 import Register from './auth/Register';
 
-const NotLogged = () => {
+const NotLogged = ({type}) => {
 
-  return (
-    <div className={styles.container}>
-      <Logo />
-      <Routes>
-        <Route path={'/'} element={<Greeting/>}/>
-        <Route path={'/login'} element={<Login/>}/>
-        <Route path={'/signup'} element={<Register/>}/>
-      </Routes>
-      <Creator />
-    </div>
-  )
+  if (type === 'greeting') {
+    return (
+      <div className={styles.container}>
+        <Logo />
+        <Greeting />
+        <Creator />
+      </div>
+    )
+  }
+
+  if (type === 'login') {
+    return (
+      <div className={styles.container}>
+        <Logo />
+        <Login />
+        <Creator />
+      </div>
+    )
+  }
+
+  if (type === 'register') {
+    return (
+      <div className={styles.container}>
+        <Logo />
+        <Register />
+        <Creator />
+      </div>
+    )
+  }
 }
 
 export default NotLogged;

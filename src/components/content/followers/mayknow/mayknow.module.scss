@@ -1,28 +1,7 @@
 @import '../../../../vars.scss';
-.person {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 16px 0;
-}
-.data {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.avatar > div > img {
-  width: 36px;
-}
+
 .title {
-  text-align: center;
   color: $font-main;
-}
-.button {
-  color: $logo;
-  border: 1px solid $logo;
-  padding: 2px 8px;
-  border-radius: 24px;
-}
-.hr {
-  border: 1px solid $logo
+  font-weight: 700;
+  padding-bottom: 8px;
 }

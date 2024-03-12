@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import styles from './followings.module.scss';
+import UserFollowings from './userFollowings/UserFollowings';
 
 const Followings = () => {
 
@@ -12,7 +13,7 @@ const Followings = () => {
 
   async function fetchData() {
     try {
-      const data = await fetch(`http://localhost:5000/api/${localStorage.userId}/followings`);
+      const data = await fetch(`http://192.168.0.16:5000/api/users/${localStorage.userId}/followings`);
       const json = await data.json();
       setData(json)
     }
@@ -21,14 +22,14 @@ const Followings = () => {
     }
   }
 
-  console.log(data);
-
   return (
-    <div className={styles.container}>
+    data && <div className={styles.container}>
       <div className={styles.title}>People you follow</div>
       <div className={styles.followings}>
         {data.length > 0 && data.map(item => {
-          return <div>{item.username}</div>
+          return (
+            <UserFollowings setData={setData} data={data} user={item}/>
+          )
         })}
       </div>
     </div>

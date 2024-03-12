@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { LoginContext } from './contexts/context';
+import { Routes, Route } from 'react-router-dom';
+import Profile from './components/profile/Profile';
 import NotLogged from './components/notLogged/NotLogged'
 import Content from './components/content/Content';
 import './App.scss';                                    
@@ -17,7 +19,12 @@ const App = () => {
 
   return (
     <LoginContext.Provider value={{setUser}}>
-      {!user ? <NotLogged /> : <Content/>}
+      <Routes>
+        <Route path={'/login'} element={<NotLogged type={'login'}/>}/>
+        <Route path={'/signup'} element={<NotLogged type={'register'}/>}/>
+        <Route path={'/profile'} element={<Profile/>}/>
+        <Route path={'/'} element={!user ? <NotLogged type={'greeting'}/> : <Content/>} exact/>
+      </Routes>
     </LoginContext.Provider>
   )
 }
