@@ -1,6 +1,5 @@
-.container {
-  animation: slideIn 0.3s ease;
-}
+@import '/src/vars.scss';
+
 @keyframes slideIn {
   0% {
     transform: translateY(16px);
@@ -8,4 +7,29 @@
   100% {
     transform: translateY(0);
   }
+}
+.outerContainer {
+  animation: slideIn 0.45s ease;
+}
+.innerContainer {
+  margin: 0 24px;
+}
+hr {
+  margin: 0;
+  border: 2px solid $bg-dark;
+}
+.loadingOuter {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.loadingInner {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
 }

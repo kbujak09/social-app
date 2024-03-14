@@ -1,0 +1,32 @@
+@import '../../../vars.scss';
+
+.container  {
+  background-color: $bg-dark;
+  height: 48px;
+  border-radius: 20px;
+  padding: 16px;
+}
+.text {
+  opacity: 0.8;
+  background-color: $bg-dark;
+  border: 0;
+}
+.containerFocused {
+  background-color: $bg-dark;
+  transition: height 1s ease;
+  height: 96px;
+  border-radius: 20px;
+  padding: 16px;
+}
+.textFocused {
+  background-color: $bg-dark;
+  border: 0;
+  font-size: 16px;
+  height: 100%;
+  width: 100%;
+  resize: none;
+}
+.textFocused:focus {
+  border: 0;
+  outline: 0;
+}
