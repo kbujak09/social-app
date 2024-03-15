@@ -6,17 +6,26 @@ const PostCreator = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  if (isOpen) {
-    return (
-      <div className={styles.containerFocused}>
-        <textarea type="text" className={styles.textFocused}></textarea>
-      </div>
-    )
+  const openCreator = () => {
+    setIsOpen(true);
+  }
+
+  const closeCreator = (e) => {
+    e.stopPropagation();
+    setIsOpen(false);
+    console.log('pablo')
   }
 
   return (
-    <div className={styles.container} onClick={() => setIsOpen(true)}>
-      <input type='text' placeholder="What's on your mind?" className={styles.text} readonly/>
+    <div className={isOpen ? styles.containerFocused : styles.container} onClick={openCreator}>
+      {isOpen ? (
+        <>
+          <textarea className={styles.textFocused} maxLength='120' autoFocus></textarea>
+          <div className={styles.closer} onClick={closeCreator}>x</div>
+        </>
+      ) : (
+        <input type="text" placeholder="What's on your mind?" className={styles.text} readOnly/>
+      )}
     </div>
   )
 
