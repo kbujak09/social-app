@@ -15,7 +15,7 @@
 .containerFocused {
   background-color: $bg-dark;
   transition: height 1s ease;
-  height: 96px;
+  height: 112px;
   border-radius: 20px;
   padding: 16px;
   padding-right: 32px;
@@ -24,6 +24,7 @@
 }
 .textFocused {
   background-color: $bg-dark;
+  font-family: 'Roboto', sans-serif;
   border: 0;
   font-size: 16px;
   height: 100%;
@@ -38,4 +39,19 @@
   position: absolute;
   top: 8px;
   right: 16px;
+  cursor: pointer;
+}
+.submit {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 0.8px;
+  color: #8e8e8e;
+  cursor: pointer;
+}
+.submit:hover {
+  color: $logo;
 }
