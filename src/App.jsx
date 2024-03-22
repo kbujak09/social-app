@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import Profile from './components/profile/Profile';
 import NotLogged from './components/notLogged/NotLogged'
 import Content from './components/content/Content';
+import Following from './components/content/following/Following';
+import Followers from './components/content/followers/Followers';
 import './App.scss';                                    
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
       <Routes>
         <Route path={'/login'} element={<NotLogged type={'login'}/>}/>
         <Route path={'/signup'} element={<NotLogged type={'register'}/>}/>
+        <Route path={'/profile/followers'} element={<Followers/>}/>
+        <Route path={'/profile/following'} element={<Following/>}/>
         <Route path={'/profile'} element={<Profile/>}/>
         <Route path={'/'} element={!user ? <NotLogged type={'greeting'}/> : <Content/>} exact/>
       </Routes>

@@ -1,0 +1,22 @@
+@import '../../../../vars.scss';
+
+.container {
+  background-color: $bg-dark;
+  border-radius: 20px;
+  padding: 12px 16px;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.username {
+  color: $gray;
+  font-size: 14px;
+}
+.user > div > img {
+  width: 36px;
+}
+.text {
+  margin: 12px 0 20px 0;
+}

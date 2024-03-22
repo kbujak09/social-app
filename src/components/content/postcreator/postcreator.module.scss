@@ -5,6 +5,7 @@
   height: 48px;
   border-radius: 20px;
   padding: 16px;
+  transition: height 1s ease;
 }
 .text {
   opacity: 0.8;
@@ -12,9 +13,11 @@
   border: 0;
   font-family: 'Roboto', sans-serif;
 }
+.text::placeholder {
+  color: $gray;
+}
 .containerFocused {
   background-color: $bg-dark;
-  transition: height 1s ease;
   height: 112px;
   border-radius: 20px;
   padding: 16px;
@@ -49,7 +52,7 @@
   font-size: 14px;
   text-align: center;
   letter-spacing: 0.8px;
-  color: #8e8e8e;
+  color: $gray;
   cursor: pointer;
 }
 .submit:hover {

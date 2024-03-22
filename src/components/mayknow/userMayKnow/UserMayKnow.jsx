@@ -1,12 +1,12 @@
 import styles from './usermayknow.module.scss';
-import Avatar from '../../../../avatar/Avatar';
+import Avatar from '../../avatar/Avatar';
 
 const UserMayKnow = ({user, setData, data}) => {
 
   console.log(data)
 
   const follow = async () => {
-    const req = await fetch(`http://192.168.0.16:5000/api/users/${localStorage.userId}/follow?followedId=${user._id}`, {
+    const req = await fetch(`http://localhost:5000/api/users/${localStorage.userId}/follow?followedId=${user._id}`, {
       method: 'POST'
     });
     console.log(data)

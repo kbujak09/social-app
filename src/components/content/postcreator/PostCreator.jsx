@@ -46,7 +46,7 @@ const createPost = async (e) => {
 };
 
   return (
-    <div className={isOpen ? styles.containerFocused : styles.container} onClick={openCreator}>
+    <div className={isOpen ? `${styles.container} ${styles.containerFocused}` : styles.container} onClick={openCreator}>
       {isOpen ? (
         <>
           <textarea value={value} onChange={(e) => setValue(e.target.value)} className={styles.textFocused} maxLength='120' autoFocus></textarea>

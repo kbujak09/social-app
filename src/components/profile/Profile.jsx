@@ -1,5 +1,5 @@
 import styles from './profile.module.scss';
-import SwipeBack from './swipeback/SwipeBack';
+import SwipeBack from '../swipeback/SwipeBack';
 import User from './user/User';
 import ReactLoading from 'react-loading';
 
@@ -40,7 +40,7 @@ const Profile = () => {
 
   return (
     <div className={styles.outerContainer}>
-      <SwipeBack />
+      <SwipeBack path={'/'}/>
       <hr />
       <div className={styles.innerContainer}>
         {user && <User user={user}/>}

@@ -1,13 +1,13 @@
-import styles from './userfollowings.module.scss';
-import Avatar from '../../../../avatar/Avatar';
+import styles from './userfollowing.module.scss';
+import Avatar from '../../../avatar/Avatar';
 
-const UserFollowings = ({user, data, setData}) => {
+const UserFollowing = ({user, data, setData}) => {
 
   const unfollow = async () => {
     const req = await fetch(`http://192.168.0.16:5000/api/users/${localStorage.userId}/unfollow?followedId=${user._id}`, {
       method: 'POST'
     });
-    await setData(data.filter(item => item._id !== user._id));
+    setData(data.filter(item => item._id !== user._id));
   }
 
   return (
@@ -21,4 +21,4 @@ const UserFollowings = ({user, data, setData}) => {
   )
 }
 
-export default UserFollowings;
+export default UserFollowing;
