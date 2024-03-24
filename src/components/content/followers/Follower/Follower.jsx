@@ -7,6 +7,8 @@ const Follower = ({user}) => {
     const req = await fetch('');
   }
 
+  console.log(user);
+
   return (
     <div className={styles.person}>
       <div className={styles.data}>

@@ -15,7 +15,7 @@ const User = ({user}) => {
       </div>
       <div className={styles.socialCounters}>
         <div className={styles.followers} onClick={() => navigate('/profile/followers')}>Followers: {user.followers.length}</div>
-        <div className={styles.following} onClick={() => navigate('/profile/following')}>Following: {user.followings.length}</div>
+        <div className={styles.following} onClick={() => navigate('/profile/following')}>Following: {user.following.length}</div>
       </div>
     </div>
   )

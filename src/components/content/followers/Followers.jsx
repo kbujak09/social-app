@@ -1,11 +1,12 @@
 import styles from './followers.module.scss';
 import SwipeBack from '../../swipeback/SwipeBack';
+import Follower from './follower/Follower';
 
 import { useState, useEffect } from 'react';
 
 const Followers = () => {
 
-  const [data, setData] = useState();
+  const [users, setUsers] = useState();
 
   useEffect(() => {
     fetchData();
@@ -15,22 +16,20 @@ const Followers = () => {
     try {
       const data = await fetch(`http://localhost:5000/api/users/${localStorage.userId}/followers`);
       const json = await data.json();
-      setData(json);
+      setUsers(json);
     }
     catch (err) {
       console.error(err);
     }
   }
 
-  console.log(data);
-
   return (
     <>
       <SwipeBack path={'/profile'}/>
       <div className={styles.container}>
-        {data && data.length > 0 && data.map(item => {
+        {users && users.length > 0 && users.map(user => {
           return (
-            <div>{data.username}</div>
+            <Follower user={user}/>
           )
         })}
       </div>
