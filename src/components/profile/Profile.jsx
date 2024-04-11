@@ -1,11 +1,15 @@
 import styles from './profile.module.scss';
 import SwipeBack from '../swipeback/SwipeBack';
 import User from './user/User';
-import ReactLoading from 'react-loading';
+import Buttons from './buttons/Buttons';
 
+import ReactLoading from 'react-loading';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
+
+  let { userId } = useParams();
 
   const [user, setUser] = useState();
 
@@ -13,7 +17,10 @@ const Profile = () => {
 
   const fetchUser = async () => {
     try {
-      const res = await fetch(`http://192.168.0.19:5000/api/users/${localStorage.userId}`);
+      if (!userId) {
+        userId = localStorage.userId;
+      }
+      const res = await fetch(`http://localhost:5000/api/users/${userId}`);
       const user = await res.json();
       setUser(user);
       setIsLoading(false);
@@ -30,7 +37,7 @@ const Profile = () => {
   if (isLoading) {
     return (
       <div className={styles.loadingOuter}>
-        <SwipeBack />
+        <SwipeBack/>
         <div className={styles.loadingInner}>
           <ReactLoading width='48px' type='spin'/>
         </div>
@@ -46,6 +53,11 @@ const Profile = () => {
         {user && <User user={user}/>}
       </div>
       <hr />
+      {user._id !== localStorage.userId ? 
+      <>
+        <Buttons userId={user._id}/>
+        <hr/>
+      </> : null}
     </div>
   )
 };

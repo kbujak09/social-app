@@ -3,12 +3,12 @@ import arrowBack from '../../assets/arrow_back.svg';
 
 import { useNavigate } from 'react-router-dom';
 
-const SwipeBack = ({path}) => {
+const SwipeBack = () => {
 
   const navigate = useNavigate();
 
   return (
-    <div className={styles.container} onClick={() => navigate(path)}>
+    <div className={styles.container} onClick={() => navigate(-1)}>
       <img className={styles.image} src={arrowBack} alt='arrow back'/>
     </div>
   )

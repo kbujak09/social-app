@@ -1,7 +1,7 @@
 import styles from './auth.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
-import { LoginContext } from '../../../contexts/context';
+import { Context } from '../../../contexts/context';
 
 
 const Login = () => {
@@ -13,12 +13,12 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [isShaking, setIsShaking] = useState(false);
 
-  const { setUser } = useContext(LoginContext);
+  const { setUser } = useContext(Context);
 
   const logIn = async (e) => {
     e.preventDefault();
     try {
-      let req = await fetch('http://192.168.0.19:5000/api/login', {
+      let req = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

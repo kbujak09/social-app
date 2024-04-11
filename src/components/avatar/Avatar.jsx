@@ -8,7 +8,6 @@ import avatar6 from '../../assets/avatar6.webp';
 import avatar7 from '../../assets/avatar7.webp';
 import avatar8 from '../../assets/avatar8.webp';
 
-
 const Avatar = ({id}) => {
   
   const avatars = [
@@ -24,7 +23,7 @@ const Avatar = ({id}) => {
 
   if (id) {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} >
         <img src={avatars[id.slice(-1) - 1]} alt="avatar" />
       </div>
     )

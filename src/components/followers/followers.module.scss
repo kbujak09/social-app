@@ -1,0 +1,22 @@
+@import '../../vars.scss';
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  padding-bottom: 8px;
+}
+.followers {
+  padding-bottom: 36px;
+}
+.container {
+  margin: 12px 24px;
+}
+.empty {
+  text-align: center;
+  font-weight: 700;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  letter-spacing: 0.5px;
+}
