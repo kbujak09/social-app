@@ -90,7 +90,9 @@ const App = () => {
                             setFollowers, 
                             isLoading,
                             fetchFollowing,
-                            fetchFollowers}}>
+                            fetchFollowers,
+                            fetchPosts,
+                            setPosts}}>
       <Routes>
         <Route path={'/login'} element={<NotLogged type={'login'}/>}/>
         <Route path={'/signup'} element={<NotLogged type={'register'}/>}/>
