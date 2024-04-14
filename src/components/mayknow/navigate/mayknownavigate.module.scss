@@ -1,0 +1,16 @@
+@import '../../../vars.scss';
+
+.container {
+  background-color: $bg-dark;
+  margin: 12px 0;
+  padding: 12px;
+  text-align: center;
+  border-radius: 16px;
+}
+.link {
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 15px;
+  color: $logo;
+}

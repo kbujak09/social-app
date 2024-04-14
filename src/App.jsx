@@ -4,6 +4,7 @@ import NotLogged from './components/notLogged/NotLogged'
 import Homepage from './components/homepage/Homepage';
 import Following from './components/following/Following';
 import Followers from './components/followers/Followers';
+import MayKnow from './components/mayknow/MayKnow';
 import './App.scss';                  
 
 import { useState, useEffect } from 'react';
@@ -66,6 +67,7 @@ const App = () => {
         setIsLoading(false);
       }
     }
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -101,6 +103,7 @@ const App = () => {
         <Route path={'/user/:userId/followers'} element={<Followers/>}/>
         <Route path={'/user/:userId/following'} element={<Following/>}/>
         <Route path={'/profile'} element={<Profile/>}/>
+        <Route path={'/mayknow'} element={<MayKnow/>}/>
         <Route path={'/user/:userId'} element={<Profile/>}/>
         <Route path={'/'} element={!user && !isLoading ? <NotLogged type={'greeting'}/> : <Homepage/>} exact/>
       </Routes>

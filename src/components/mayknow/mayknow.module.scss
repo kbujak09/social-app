@@ -1,7 +1,10 @@
-@import '../../../../vars.scss';
+@import '../../vars.scss';
 
 .title {
   color: $font-main;
   font-weight: 700;
   padding-bottom: 8px;
+}
+.innerContainer {
+  margin: 12px 24px
 }

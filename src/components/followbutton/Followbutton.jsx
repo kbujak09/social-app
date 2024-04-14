@@ -1,13 +1,13 @@
-import styles from './status.module.scss';
-import { Context } from '../../../../contexts/context';
+import styles from './followbutton.module.scss';
+import { Context } from '../../contexts/context';
 
-import { useContext, useEffect, useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
-const Status = ({userId}) => {
+const Followbutton = ({userId, size}) => {
+
+  const [isFollowed, setIsFollowed] = useState(undefined);
 
   const { following, setFollowing, fetchPosts, setPosts } = useContext(Context);
-
-  const [isFollowed, setIsFollowed] = useState(false);
 
   const checkIsFollowed = () => {
     for (let user of following) {
@@ -21,7 +21,6 @@ const Status = ({userId}) => {
   const deleteFollow = (userId) => {
     const list = following;
     const updatedFollowing = list.filter(item => item._id === userId);
-    console.log(list, updatedFollowing);
     setFollowing(updatedFollowing);
   }
 
@@ -54,17 +53,26 @@ const Status = ({userId}) => {
     if (checkIsFollowed()) {
       setIsFollowed(true);
     }
+    else {
+      setIsFollowed(false);
+    }
   }, []);
 
-  if (isFollowed) {
+  if (isFollowed === undefined) {
     return (
-      <div className={`${styles.container} ${styles.followed}`} onClick={updateFollow}>following</div>
+      <></>
+    )
+  }
+
+  if (!isFollowed) {
+    return (
+      <div className={`${styles.container} ${styles.follow} ${size === 'large' ? styles.large : null}`} onClick={updateFollow}>FOLLOW</div>
     )
   }
 
   return (
-    <div className={`${styles.container} ${styles.follow}`} onClick={updateFollow}>follow</div>
+    <div className={`${styles.container} ${styles.following} ${size === 'large' ? styles.large : null}`} onClick={updateFollow}>FOLLOWING</div>
   )
 }
 
-export default Status;
+export default Followbutton;

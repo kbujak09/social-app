@@ -14,7 +14,7 @@ const Followers = () => {
 
   const { followers, fetchFollowers } = useContext(Context);
 
-  const checkIsLocal = () => userId === localStorage.userId ? true : false;
+  const checkIsLocal = () => !userId ? true : false;
 
   useEffect(() => {
     if (userId) {

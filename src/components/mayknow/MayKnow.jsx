@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
 import styles from './mayknow.module.scss';
-import UserMayKnow from './userMayKnow/UserMayKnow';
+import UserMayKnow from './user/UserMayKnow';
+import SwipeBack from '../swipeback/SwipeBack';
 
 const MayKnow = () => {
 
@@ -13,7 +14,7 @@ const MayKnow = () => {
 
   async function fetchUsers() {
     try {
-      const data = await fetch(`http://192.168.0.16:5000/api/users/may-know?userId=${localStorage.userId}`);
+      const data = await fetch(`http://localhost:5000/api/users/may-know?userId=${localStorage.userId}`);
       const json = await data.json();
       setData(json)
     }
@@ -23,15 +24,18 @@ const MayKnow = () => {
   }
 
   return (
-    data && data.length > 0 && <div className={styles.container}>
-      <div className={styles.title}>People you may know</div>
-      <div className={styles.users}>
-        {data.length > 0 && data.map(item => {
-          return (
-            <UserMayKnow setData={setData} data={data} user={item}/>
-          )})
-        }
-      </div>
+    <div className={styles.container}>
+        <SwipeBack />
+        {data && data.length > 0 && <div className={styles.innerContainer}>
+        <div className={styles.title}>People you may know</div>
+        <div className={styles.users}>
+          {data.length > 0 && data.map(item => {
+            return (
+              <UserMayKnow setData={setData} data={data} user={item}/>
+            )})
+          }
+        </div>
+      </div>}
     </div>
   )
 };

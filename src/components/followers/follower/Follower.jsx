@@ -2,8 +2,7 @@ import styles from './follower.module.scss';
 import Avatar from '../../avatar/Avatar';
 
 const Follower = ({user, setUsers, users, isLocalUser}) => {
-
-
+  
   const remove = async () => {
     try {
       const req = await fetch(`http://localhost:5000/api/users/${localStorage.userId}/remove?followerId=${user._id}`, {

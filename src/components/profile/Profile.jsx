@@ -1,7 +1,7 @@
 import styles from './profile.module.scss';
 import SwipeBack from '../swipeback/SwipeBack';
 import User from './user/User';
-import Buttons from './buttons/Buttons';
+import Followbutton from '../followbutton/Followbutton';
 
 import ReactLoading from 'react-loading';
 import { useState, useEffect } from 'react';
@@ -55,7 +55,9 @@ const Profile = () => {
       <hr />
       {user._id !== localStorage.userId ? 
       <>
-        <Buttons userId={user._id}/>
+        <div className={styles.button}>
+          <Followbutton userId={user._id}/>
+        </div>
         <hr/>
       </> : null}
     </div>

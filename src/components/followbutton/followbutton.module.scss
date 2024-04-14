@@ -1,0 +1,16 @@
+@import '../../vars.scss';
+
+.container {
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+.follow {
+  background-color: $logo;
+}
+.following {
+  background-color: $font-main;
+  color: $gray;
+}
