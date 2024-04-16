@@ -1,7 +1,7 @@
 import styles from './followers.module.scss';
 import SwipeBack from '../swipeback/SwipeBack';
-import Follower from './follower/Follower';
 import { Context } from '../../contexts/context';
+import User from '../user/User';
 
 import { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -13,6 +13,8 @@ const Followers = () => {
   const { userId } = useParams();
 
   const { followers, fetchFollowers } = useContext(Context);
+
+  let i = 0;
 
   const checkIsLocal = () => !userId ? true : false;
 
@@ -33,7 +35,7 @@ const Followers = () => {
         <div className={styles.followers}>
           {data && data.length > 0 && data.map(user => {
             return (
-              <Follower isLocalUser={checkIsLocal} user={user} setUsers={setData} users={data}/>
+              <User key={i++} user={user} isLocal={checkIsLocal()} isDelete={true} data={data} setData={setData}/>
             )
          })}
         </div>

@@ -1,7 +1,11 @@
 import styles from './menu.module.scss';
 import logo from '../../assets/logo-hor.webp';
 
+import { useNavigate } from 'react-router-dom';
+
 const Menu = ({setIsMenuOpen}) => {
+
+  const navigate = useNavigate();
 
   const logOut = () => {
     localStorage.clear();
@@ -19,7 +23,7 @@ const Menu = ({setIsMenuOpen}) => {
         <div className={styles.logo}>
           <img src={logo} alt="logo" />
         </div>
-        <div className={styles.button}>PROFILE</div>
+        <div className={styles.button} onClick={() => navigate('/profile')}>PROFILE</div>
         <div className={styles.button}>SETTINGS</div>
         <div onClick={logOut} id={styles.logOut} className={styles.button}>LOG OUT</div>
       </div>

@@ -13,9 +13,9 @@ const Post = ({data}) => {
 
   useEffect(() => {
     setButtonsData({
-      likes: data.likes.length,
-      comments: data.comments.length,
-      forwards: data.forwards.length
+      likes: data.likes,
+      comments: data.comments,
+      forwards: data.forwards
     })
   }, []);
 
@@ -26,7 +26,7 @@ const Post = ({data}) => {
         <div className={styles.username}>{data.author.username}</div>
       </div>
       <div className={styles.text}>{data.text}</div>
-      <Buttons data={buttonsData}/>
+      <Buttons data={buttonsData} setData={setButtonsData} postId={data._id}/>
     </div>
   )
 };

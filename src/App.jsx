@@ -72,7 +72,7 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [localStorage.token])
 
   if (isLoading) {
     return (

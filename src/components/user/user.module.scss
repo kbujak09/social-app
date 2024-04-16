@@ -1,0 +1,19 @@
+@import '../../vars.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.avatar > div > img {
+  width: 40px;
+}
+.post {
+  color: $gray;
+}

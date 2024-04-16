@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 
 import styles from './mayknow.module.scss';
-import UserMayKnow from './user/UserMayKnow';
 import SwipeBack from '../swipeback/SwipeBack';
+import User from '../user/User';
 
 const MayKnow = () => {
 
   const [data, setData] = useState();
 
-  useEffect(() => {
-    fetchUsers();
-  }, [])
+  let i = 0;
 
-  async function fetchUsers() {
+  const fetchUsers = async () => {
     try {
       const data = await fetch(`http://localhost:5000/api/users/may-know?userId=${localStorage.userId}`);
       const json = await data.json();
@@ -23,6 +21,19 @@ const MayKnow = () => {
     }
   }
 
+  useEffect(() => {
+    fetchUsers();
+  }, [])
+
+  if (data && data.length === 0) {
+    return (
+      <div className={styles.container}>
+        <SwipeBack />
+        <div className={styles.empty}>All users followed!</div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.container}>
         <SwipeBack />
@@ -31,7 +42,7 @@ const MayKnow = () => {
         <div className={styles.users}>
           {data.length > 0 && data.map(item => {
             return (
-              <UserMayKnow setData={setData} data={data} user={item}/>
+              <User key={i++} user={item}/>
             )})
           }
         </div>
