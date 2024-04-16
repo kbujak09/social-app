@@ -1,7 +1,7 @@
 import styles from './profile.module.scss';
 import SwipeBack from '../swipeback/SwipeBack';
 import User from './user/User';
-import Followbutton from '../followbutton/FollowButton';
+import FollowButton from '../followbutton/FollowButton';
 import ProfilePosts from './posts/ProfilePosts';
 
 import ReactLoading from 'react-loading';
@@ -57,7 +57,7 @@ const Profile = () => {
       {user._id !== localStorage.userId ? 
       <>
         <div className={styles.button}>
-          <Followbutton userId={user._id} size={'large'}/>
+          <FollowButton userId={user._id} size={'large'}/>
         </div>
         <hr/>
       </> : null}
