@@ -10,6 +10,9 @@
 }
 .outerContainer {
   animation: slideIn 0.45s ease;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 .innerContainer {
   margin: 0 24px;

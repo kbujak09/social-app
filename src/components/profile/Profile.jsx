@@ -2,6 +2,7 @@ import styles from './profile.module.scss';
 import SwipeBack from '../swipeback/SwipeBack';
 import User from './user/User';
 import Followbutton from '../followbutton/FollowButton';
+import ProfilePosts from './posts/ProfilePosts';
 
 import ReactLoading from 'react-loading';
 import { useState, useEffect } from 'react';
@@ -60,6 +61,7 @@ const Profile = () => {
         </div>
         <hr/>
       </> : null}
+      <ProfilePosts userId={userId ? userId : localStorage.userId}/>
     </div>
   )
 };
