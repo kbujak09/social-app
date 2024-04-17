@@ -1,7 +1,9 @@
+@import '../../../../vars.scss';
+
 .container {
   display: flex;
   justify-content: space-around;
-  gap: 12px;
+  gap: 16px;
   margin: 0 48px;
 }
 .icon {
@@ -16,5 +18,11 @@
 .button {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+}         
+.count {
+  color: $gray;
+}
+.likedCount {
+  color: red;
 }

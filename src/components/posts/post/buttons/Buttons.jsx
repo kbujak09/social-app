@@ -3,10 +3,13 @@ import like from '../../../../assets/like.svg';
 import like_fill from '../../../../assets/like_fill.svg';
 import comment from '../../../../assets/comment.svg';
 import forward from '../../../../assets/forward.svg';
+import { Context } from '../../../../contexts/context';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 const Buttons = ({data, setData, postId}) => {
+
+  const { setPosts, posts } = useContext(Context);
 
   const [liked, setLiked] = useState();
 
@@ -31,6 +34,18 @@ const Buttons = ({data, setData, postId}) => {
           updatedLikes.splice(index, 1);
         }
       }
+
+      const updatedPosts = posts.map(post => {
+        if (post._id === postId) {
+          return {
+            ...post,
+            likes: updatedLikes
+          }
+        }
+        return post;
+      });
+
+      setPosts(updatedPosts);
 
       setData(prevData => ({
         ...prevData, likes: updatedLikes
@@ -60,7 +75,7 @@ const Buttons = ({data, setData, postId}) => {
         <img className={`${styles.icon} ${styles.liked}`} src={like_fill} alt="like" onClick={likeSwitch}/> :
         <img className={styles.icon} src={like} alt="like" onClick={likeSwitch}/>
       }
-      <div className={styles.count}>{data.likes ? data.likes.length : 0}</div>
+      <div className={`${styles.count} ${liked ? styles.likedCount : null}`}>{data.likes ? data.likes.length : 0}</div>
     </div>
     <div className={styles.button}>
       <img className={styles.icon} src={comment} alt="comment" />

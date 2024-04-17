@@ -5,12 +5,12 @@ import Homepage from './components/homepage/Homepage';
 import Following from './components/following/Following';
 import Followers from './components/followers/Followers';
 import MayKnow from './components/mayknow/MayKnow';
+import PostPage from './components/postpage/PostPage';
 import './App.scss';                  
 
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ReactLoading from 'react-loading';
-
 
 const App = () => {
 
@@ -19,47 +19,45 @@ const App = () => {
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const fetchPosts = async (user) => {
+  
+  const fetchPosts = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/posts?userId=${user}`);
+      const res = await fetch(`http://localhost:5000/api/posts?userId=${userId}`);
       const data = await res.json();
-      return data;
-    }
-    catch (err) {
+      cb(data);
+    } catch (err) {
       console.error('Fetching posts failed: ', err);
     }
   }
-
-  const fetchFollowing = async (user) => {
+  
+  const fetchFollowing = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${user}/following`);
+      const res = await fetch(`http://localhost:5000/api/users/${userId}/following`);
       const data = await res.json();
-      return data
-    }
-    catch (err) {
+      cb(data);
+    } catch (err) {
       console.error('Fetching followed users failed: ', err);
     }
   }
-
-  const fetchFollowers = async (user) => {
+  
+  const fetchFollowers = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${user}/followers`);
+      const res = await fetch(`http://localhost:5000/api/users/${userId}/followers`);
       const data = await res.json();
-      return data;
-    }
-    catch (err) {
+      cb(data);
+    } catch (err) {
       console.error('Fetching followers failed: ', err);
     }
   }
-
+  
   const fetchData = async () => {
     if (localStorage.token) {
       try {
         await Promise.all([
-          fetchPosts(localStorage.userId).then(data => setPosts(data)), 
-          fetchFollowing(localStorage.userId).then(data => setFollowing(data)), 
-          fetchFollowers(localStorage.userId).then(data => setFollowers(data))]);
+          fetchPosts(localStorage.userId, setPosts),
+          fetchFollowing(localStorage.userId, setFollowing),
+          fetchFollowers(localStorage.userId, setFollowers)
+        ]);
         setUser(localStorage.token);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -69,10 +67,10 @@ const App = () => {
     }
     setIsLoading(false);
   }
-
+  
   useEffect(() => {
     fetchData();
-  }, [localStorage.token])
+  }, []);
 
   if (isLoading) {
     return (
@@ -105,6 +103,7 @@ const App = () => {
         <Route path={'/profile'} element={<Profile/>}/>
         <Route path={'/mayknow'} element={<MayKnow/>}/>
         <Route path={'/user/:userId'} element={<Profile/>}/>
+        <Route path={'/post/:postId'} element={<PostPage/>}/>
         <Route path={'/'} element={!user && !isLoading ? <NotLogged type={'greeting'}/> : <Homepage/>} exact/>
       </Routes>
     </Context.Provider>

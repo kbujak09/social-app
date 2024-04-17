@@ -18,7 +18,7 @@ const Following = () => {
 
   useEffect(() => {
     if (userId) {
-      fetchFollowing(userId).then(res => setData(res));
+      fetchFollowing(userId, setData);
     }
     else {
       setData(following);

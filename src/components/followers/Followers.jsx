@@ -20,7 +20,7 @@ const Followers = () => {
 
   useEffect(() => {
     if (userId) {
-      fetchFollowers(userId).then(res => setData(res));
+      fetchFollowers(userId, setData);
     }
     else {
       setData(followers);

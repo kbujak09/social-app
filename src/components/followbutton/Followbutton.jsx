@@ -4,13 +4,13 @@ import { Context } from '../../contexts/context';
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-const FollowButton = ({userId, size, isDelete, data, setData}) => {
+const FollowButton = ({userId, size, isDelete, data }) => {
 
   const profileId = useParams(userId);
 
   const [isFollowed, setIsFollowed] = useState(undefined);
 
-  const { following, setFollowing, fetchPosts, setPosts, setFollowers, followers } = useContext(Context);
+  const { following, setFollowing, fetchPosts, setPosts, setFollowers } = useContext(Context);
 
   const isLocal = () => userId === localStorage.userId ? true : false;
 
@@ -36,7 +36,7 @@ const FollowButton = ({userId, size, isDelete, data, setData}) => {
       });
       if (res.ok) {
         deleteFollow(userId);
-        fetchPosts(localStorage.userId).then(data => setPosts(data));
+        fetchPosts(localStorage.userId, setPosts);
         return setIsFollowed(false);
       }
       return console.error('Unfollowing failed!');
@@ -50,7 +50,7 @@ const FollowButton = ({userId, size, isDelete, data, setData}) => {
       const newFollowing = following;
       newFollowing.push(user);
       setFollowing(newFollowing);
-      fetchPosts(localStorage.userId).then(data => setPosts(data));
+      fetchPosts(localStorage.userId, setPosts);
       return setIsFollowed(true);
     }
     return console.error('Following failed!')
@@ -63,7 +63,8 @@ const FollowButton = ({userId, size, isDelete, data, setData}) => {
       });
 
       if (req.ok) {
-        setData(data.filter(item => item._id !== userId));
+        const newFollowers = data.filter(item => item._id !== userId)
+        setFollowers(newFollowers);
       }
     }
     catch (err) {

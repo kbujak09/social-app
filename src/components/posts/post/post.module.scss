@@ -10,8 +10,9 @@
   align-items: center;
   gap: 12px;
   font-weight: 700;
+  justify-content: space-between;
 }
-.username {
+.username, .date {
   color: $gray;
   font-size: 14px;
 }
@@ -20,4 +21,14 @@
 }
 .text {
   margin: 12px 0 20px 0;
+}
+.date {
+  display: flex;
+  gap: 8px;
+}
+.minutes {
+  opacity: 0.8;
+}
+.days {
+  color: gray;
 }

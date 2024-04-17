@@ -12,7 +12,7 @@ const Posts = () => {
 
   return (
     <div className={styles.container}>
-      {posts.length > 0 && posts.reverse().map(post => {
+      {posts && posts.length > 0 && posts.reverse().map(post => {
       return <Post data={post} key={key++}/>})
       }
     </div>
