@@ -1,31 +1,20 @@
 import styles from './profileposts.module.scss';
 import Post from '../../posts/post/Post';
+import { Context } from '../../../contexts/context';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 
-const ProfilePosts = ({userId}) => {
+const ProfilePosts = () => {
 
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchPosts = async () => {
-    try {
-      setIsLoading(true);
-      let res = await fetch(`http://localhost:5000/api/posts/${userId}`);
-      const json = await res.json();
-      setPosts(json);
-    }
-    catch (err) {
-      console.error(err);
-    }
-    finally {
-      setIsLoading(false);
-    }
-  }
+  const { userPosts } = useContext(Context);
 
   useEffect(() => {
-    fetchPosts();
+    if (userPosts) {
+      setIsLoading(false);
+    }
   }, []);
 
   let key = 0;
@@ -40,7 +29,7 @@ const ProfilePosts = ({userId}) => {
 
   return (
     <div className={styles.container}>
-      {posts.length > 0 && posts.reverse().map(post => {
+      {userPosts.length > 0 && userPosts.reverse().map(post => {
       return <Post data={post} key={key++}/>})
       }
     </div>

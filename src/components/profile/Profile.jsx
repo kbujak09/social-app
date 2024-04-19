@@ -3,6 +3,7 @@ import SwipeBack from '../swipeback/SwipeBack';
 import User from './user/User';
 import FollowButton from '../followbutton/FollowButton';
 import ProfilePosts from './posts/ProfilePosts';
+import Loader from '../loader/Loader';
 
 import ReactLoading from 'react-loading';
 import { useState, useEffect } from 'react';
@@ -37,12 +38,9 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-      <div className={styles.loadingOuter}>
-        <SwipeBack/>
-        <div className={styles.loadingInner}>
-          <ReactLoading width='48px' type='spin'/>
-        </div>
-      </div>
+      <>
+        <Loader />
+      </>
     )
   }
 

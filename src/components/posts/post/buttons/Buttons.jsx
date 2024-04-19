@@ -6,12 +6,27 @@ import forward from '../../../../assets/forward.svg';
 import { Context } from '../../../../contexts/context';
 
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Buttons = ({data, setData, postId}) => {
 
   const { setPosts, posts } = useContext(Context);
 
   const [liked, setLiked] = useState();
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const isNotNavigated = (pathname) => {
+    if (location.pathname !== pathname) {
+      return navigate(pathname);
+    }
+  };
+  
+  const navigateToComments = () => {
+    isNotNavigated(`/post/${postId}`);
+  }
 
   const likeSwitch = async () => {
     try {
@@ -78,7 +93,7 @@ const Buttons = ({data, setData, postId}) => {
       <div className={`${styles.count} ${liked ? styles.likedCount : null}`}>{data.likes ? data.likes.length : 0}</div>
     </div>
     <div className={styles.button}>
-      <img className={styles.icon} src={comment} alt="comment" />
+      <img className={styles.icon} src={comment} onClick={navigateToComments} alt="comment" />
       <div className={styles.count}>{data.comments ? data.comments.length : 0}</div>
     </div>
     <div className={styles.button}>
