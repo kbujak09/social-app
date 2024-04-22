@@ -1,8 +1,8 @@
-import styles from './postcreator.module.scss';
+import styles from './creator.module.scss';
 
 import { useState } from 'react';
 
-const PostCreator = () => {
+const Creator = ({placeholder, submitText, isComment, maxLength, postId}) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
@@ -28,13 +28,15 @@ const createPost = async (e) => {
       text: value
     }
 
-    const req = await fetch('http://localhost:5000/api/posts', {
+    const req = await fetch(`${isComment ? `http://localhost:5000/api/posts/${postId}/comment` : 'http://localhost:5000/api/posts'}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json" 
       },
       body: JSON.stringify(payload)
     });
+
+    console.log(req);
 
     if (req) {
       closeCreator(e);
@@ -46,19 +48,19 @@ const createPost = async (e) => {
 };
 
   return (
-    <div className={isOpen ? `${styles.container} ${styles.containerFocused}` : styles.container} onClick={openCreator}>
+    <div className={isOpen ? `${styles.container} ${isComment ? styles.containerFocusedComment : styles.containerFocused}` : styles.container} onClick={openCreator}>
       {isOpen ? (
         <>
-          <textarea value={value} onChange={(e) => setValue(e.target.value)} className={styles.textFocused} maxLength='120' autoFocus></textarea>
-          <div className={styles.submit} onClick={createPost}>POST</div>
+          <textarea value={value} onChange={(e) => setValue(e.target.value)} className={styles.textFocused} maxLength={maxLength} autoFocus></textarea>
+          <div className={styles.submit} onClick={createPost}>{submitText}</div>
           <div className={styles.closer} onClick={closeCreator}>x</div>
         </>
       ) : (
-        <input type="text" placeholder="What's on your mind?" className={styles.text} readOnly/>
+        <input type="text" placeholder={placeholder} className={styles.text} readOnly/>
       )}
     </div>
   )
 
 };
 
-export default PostCreator;
+export default Creator;

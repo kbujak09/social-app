@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './homepage.module.scss';
 import Header from '../header/Header';
 import Menu from '../menu/Menu';
-import PostCreator from '../postcreator/PostCreator';
+import Creator from '../creator/Creator';
 import Posts from '../posts/Posts';
 import MayKnowNavigate from '../mayknow/navigate/MayKnowNavigate';
 
@@ -14,7 +14,12 @@ const Homepage = () => {
   return (
     <div className={styles.container}>
       <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
-      <PostCreator />
+      <Creator 
+        placeholder={"What's on your mind?"}
+        submitText={"POST"}
+        isComment={false}
+        maxLength={120}
+      />
       <MayKnowNavigate /> 
       <Posts />
       {isMenuOpen ? <Menu setIsMenuOpen={setIsMenuOpen}/> : null}

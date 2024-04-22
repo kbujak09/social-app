@@ -1,11 +1,14 @@
 @import '../../vars.scss';
 
-.container  {
+.container, .containerComment  {
   background-color: $bg-dark;
   height: 48px;
   border-radius: 20px;
   padding: 16px;
   transition: height 1s ease;
+}
+.containerComment {
+  color: red;
 }
 .text {
   opacity: 0.8;
@@ -16,14 +19,17 @@
 .text::placeholder {
   color: $gray;
 }
-.containerFocused {
+.containerFocused, .containerFocusedComment {
   background-color: $bg-dark;
   height: 112px;
   border-radius: 20px;
   padding: 16px;
-  padding-right: 32px;
+  padding-right: 36px;
   position: relative;
   font-family: 'Roboto', sans-serif;
+}
+.containerFocusedComment {
+  height: 84px;
 }
 .textFocused {
   background-color: $bg-dark;

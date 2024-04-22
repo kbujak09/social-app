@@ -3,6 +3,8 @@ import SwipeBack from '../swipeback/SwipeBack';
 import { Context } from '../../contexts/context';
 import Post from '../posts/post/Post';
 import Loader from '../loader/Loader';
+import Comments from './comments/Comments';
+import Creator from '../creator/Creator';
 
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -49,6 +51,14 @@ const PostPage = () => {
       <SwipeBack />
       <div className={styles.container}>
         <Post data={post}/>
+        <Creator 
+          placeholder={"Share your thoughts!"}
+          submitText={"COMMENT"}
+          isComment={true}
+          maxLength={90}
+          postId={postId}
+        />
+        <Comments comments={post}/>
       </div>
     </>
   )
