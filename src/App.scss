@@ -4,12 +4,13 @@
 }
 @import './vars.scss';
 
-body {
+body, html {
   padding: 0;
   margin: 0;
   font-family: Roboto, sans-serif;
   background-color: $bg-main;
   color: $font-main;
+  overflow-x: hidden;
 }
 * {
   color: $font-main;
@@ -21,10 +22,25 @@ body {
   'GRAD' 0,
   'opsz' 24
 }
+::-webkit-scrollbar {
+  width: 1rem;
+}
+::-webkit-scrollbar-track {
+  background-color: $bg-main;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $bg-dark;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: $bg-dark;
+}
+
 @media (min-width: 1200px) {
   #root {
+    margin: 0;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 }
 .loading {

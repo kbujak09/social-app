@@ -5,8 +5,13 @@
   font-weight: 700;
   padding-bottom: 8px;
 }
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
 .innerContainer {
-  margin: 12px 24px
+  margin: 12px 24px;
 }
 .empty {
   font-weight: 700;
@@ -15,4 +20,10 @@
   bottom: 50%;
   width: 100%;
   text-align: center;
+}
+@media (min-width: 1200px) {
+  .empty {
+    left: 0;
+    font-size: 18px;
+  }
 }

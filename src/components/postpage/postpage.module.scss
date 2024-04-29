@@ -1,6 +1,17 @@
+@import '../../vars.scss';
+
 .container {
   margin: 0 24px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width:  $desktop;
+  }
+  .container {
+    gap: 16px;
+  }
 }

@@ -40,4 +40,14 @@ hr {
   display: flex;
   justify-content: center;
   margin: 12px 0;
+  cursor: pointer;
+}
+@media (min-width: 1200px) {
+  hr {
+    margin: 0;
+    border: 2px solid transparent;
+  }
+  .outerContainer {
+    width: $desktop;
+  }
 }

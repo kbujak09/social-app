@@ -24,7 +24,6 @@ const Menu = ({setIsMenuOpen}) => {
           <img src={logo} alt="logo" />
         </div>
         <div className={styles.button} onClick={() => navigate('/profile')}>PROFILE</div>
-        <div className={styles.button}>SETTINGS</div>
         <div onClick={logOut} id={styles.logOut} className={styles.button}>LOG OUT</div>
       </div>
     <div onClick={closeMenu} className={styles.bg}>

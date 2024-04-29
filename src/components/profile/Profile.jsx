@@ -6,14 +6,15 @@ import ProfilePosts from './posts/ProfilePosts';
 import Loader from '../loader/Loader';
 
 import ReactLoading from 'react-loading';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { Context } from '../../contexts/context';
 
 const Profile = () => {
 
   let { userId } = useParams();
 
-  const [user, setUser] = useState();
+  const { currentProfile ,setCurrentProfile } = useContext(Context);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,7 +25,7 @@ const Profile = () => {
       }
       const res = await fetch(`http://localhost:5000/api/users/${userId}`);
       const user = await res.json();
-      setUser(user);
+      setCurrentProfile(user);
       setIsLoading(false);
     }
     catch(err) {
@@ -47,17 +48,15 @@ const Profile = () => {
   return (
     <div className={styles.outerContainer}>
       <SwipeBack path={'/'}/>
-      <hr />
       <div className={styles.innerContainer}>
-        {user && <User user={user}/>}
+        {currentProfile && <User user={currentProfile}/>}
       </div>
-      <hr />                                    
-      {user._id !== localStorage.userId ? 
+      {currentProfile._id !== localStorage.userId ? 
       <>
         <div className={styles.button}>
-          <FollowButton userId={user._id} size={'large'}/>
+          <FollowButton userId={currentProfile._id} size={'large'}/>
         </div>
-        <hr/>
+
       </> : null}
       <ProfilePosts userId={userId ? userId : localStorage.userId}/>
     </div>

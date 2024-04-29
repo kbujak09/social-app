@@ -14,3 +14,13 @@
   font-size: 15px;
   color: $logo;
 }
+
+@media (min-width: 1200px) {
+  .container {
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .link {
+    font-size: 17px;
+  }
+}

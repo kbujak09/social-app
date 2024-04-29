@@ -1,6 +1,15 @@
+@import '../../vars.scss';
+
 .container {
   padding: 16px;
 }
 .image {
+  cursor: pointer;
   filter: invert(98%) sepia(2%) saturate(438%) hue-rotate(180deg) brightness(96%) contrast(85%);
+}
+@media (min-width: 1200px) {
+  .container {
+    padding: 24px 16px;
+    width: $desktop;
+  }
 }

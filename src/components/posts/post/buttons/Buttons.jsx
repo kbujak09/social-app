@@ -4,15 +4,18 @@ import like_fill from '../../../../assets/like_fill.svg';
 import comment from '../../../../assets/comment.svg';
 import forward from '../../../../assets/forward.svg';
 import { Context } from '../../../../contexts/context';
+import { likeSwitch } from '../../../../utils/utils';
 
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Buttons = ({data, setData, postId}) => {
+const Buttons = ({data, setData, postId, author, post, isForward}) => {
 
   const { setPosts, posts } = useContext(Context);
 
   const [liked, setLiked] = useState();
+
+  const [isForwarded, setIsForwarded] = useState();
 
   const navigate = useNavigate();
 
@@ -28,47 +31,39 @@ const Buttons = ({data, setData, postId}) => {
     isNotNavigated(`/post/${postId}`);
   }
 
-  const likeSwitch = async () => {
+  const handleLikeSwitch = () => likeSwitch(posts, setPosts, data, setData, liked, setLiked, postId, `http://localhost:5000/api/posts/${postId}/likes?userId=${localStorage.userId}`);
+
+  const handleForwardSwitch = async () => {
     try {
-      let updatedLikes; 
 
-      if (data.likes) {
-        updatedLikes = [...data.likes];
-      }
-      else {
-        updatedLikes = [];
-      }
+      let updatedForwards = data.forwards ? [...data.forwards] : [];
 
-      if (!liked) {
-        updatedLikes.push(localStorage.userId);
-        setLiked(true);
-      }
-      else {
-        const index = updatedLikes.indexOf(localStorage.userId);
-        if (index !== -1) {
-          updatedLikes.splice(index, 1);
-        }
+      let updatedPosts = posts;
+
+      const userId = localStorage.userId;
+
+      if (!data.forwards.some(forward => forward.author === userId)) {
+        updatedForwards = [...data.forwards, { author: userId, post: postId }];
+        setIsForwarded(true);
+      } else {
+        updatedForwards = data.forwards.filter(forward => forward.author !== userId);
+        setIsForwarded(false);
       }
 
-      const updatedPosts = posts.map(post => {
+      updatedPosts.forEach(post => {
         if (post._id === postId) {
-          return {
-            ...post,
-            likes: updatedLikes
-          }
-        }
-        return post;
+          post.forwards = updatedForwards;
+        } 
       });
 
       setPosts(updatedPosts);
 
-      setData(prevData => ({
-        ...prevData, likes: updatedLikes
+      setData((prevData) => ({
+        ...prevData,
+        forwards: updatedForwards
       }));
 
-      setLiked(!liked);
-
-      await fetch(`http://localhost:5000/api/posts/${postId}/likes?userId=${localStorage.userId}`, {
+      await fetch(`http://localhost:5000/api/posts/${postId}/forward?userId=${localStorage.userId}`, {
         method: 'POST'
       });
     }
@@ -83,22 +78,28 @@ const Buttons = ({data, setData, postId}) => {
     }
   }, [data.likes]);
 
+  useEffect(() => {
+    if (data.forwards && data.forwards.some(forward => forward.author === localStorage.userId)) {
+      setIsForwarded(true);
+    }
+  }, [data.forwards]);
+
   return (
     data && <div className={styles.container}>
     <div className={styles.button}>
       {liked ? 
-        <img className={`${styles.icon} ${styles.liked}`} src={like_fill} alt="like" onClick={likeSwitch}/> :
-        <img className={styles.icon} src={like} alt="like" onClick={likeSwitch}/>
+        <img className={`${styles.icon} ${styles.liked}`} src={like_fill} alt="like" onClick={handleLikeSwitch}/> :
+        <img className={styles.icon} src={like} alt="like" onClick={handleLikeSwitch}/>
       }
       <div className={`${styles.count} ${liked ? styles.likedCount : null}`}>{data.likes ? data.likes.length : 0}</div>
     </div>
-    <div className={styles.button}>
-      <img className={styles.icon} src={comment} onClick={navigateToComments} alt="comment" />
+    <div onClick={navigateToComments} className={styles.button}>
+      <img className={styles.icon} src={comment} alt="comment" />
       <div className={styles.count}>{data.comments ? data.comments.length : 0}</div>
     </div>
-    <div className={styles.button}>
-      <img className={styles.icon} src={forward} alt="forward" />
-      <div className={styles.count}>{data.forwards ? data.forwards.length : 0}</div>
+    <div className={styles.button} onClick={handleForwardSwitch}>
+      <img className={isForwarded ? `${styles.icon} ${styles.forwarded}` : `${styles.icon}`} src={forward} alt="forward"/>
+      <div className={isForwarded ? `${styles.count} ${styles.forwarded}` : `${styles.count}`}>{data.forwards ? data.forwards.length : 0}</div>
     </div>
   </div>
   );

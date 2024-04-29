@@ -6,4 +6,10 @@
 }
 .menu > img {
   width: 24px;
+  cursor: pointer;
+}
+@media (min-width: 1200px) {
+  .container {
+    margin: 32px 0;
+  }
 }

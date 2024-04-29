@@ -3,8 +3,9 @@ import SwipeBack from '../swipeback/SwipeBack';
 import { Context } from '../../contexts/context';
 import Post from '../posts/post/Post';
 import Loader from '../loader/Loader';
-import Comments from './comments/Comments';
+import CommentsList from './commentslist/CommentsList';
 import Creator from '../creator/Creator';
+import { CommentContext } from '../../contexts/context';
 
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -21,6 +22,8 @@ const PostPage = () => {
 
   const [post, setPost] = useState({});
 
+  const [comments, setComments] = useState();
+
   const [isLoading, setIsLoading] = useState(true);
 
   const getCurrentPost = () => {
@@ -32,10 +35,25 @@ const PostPage = () => {
     }
     setIsLoading(false);
     return navigate(-1);
+  };
+
+  const getComments = async () => {
+    const req = await fetch(`http://localhost:5000/api/posts/${postId}/comments`);
+
+    if (req.ok) {
+      return setComments(await req.json());
+    }
+
+    if (comments.length === 0) {
+      return setComments([]);
+    }
+
+    return;
   }
 
   useEffect(() => {
     getCurrentPost();
+    getComments();
   }, []);
 
   if (isLoading) {
@@ -55,10 +73,13 @@ const PostPage = () => {
           placeholder={"Share your thoughts!"}
           submitText={"COMMENT"}
           isComment={true}
-          maxLength={90}
+          maxLength={70}
           postId={postId}
+          setState={setComments}
         />
-        <Comments comments={post}/>
+        <CommentContext.Provider value={{comments, setComments}}>
+          <CommentsList />
+        </CommentContext.Provider>
       </div>
     </>
   )

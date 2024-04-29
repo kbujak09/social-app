@@ -19,10 +19,27 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }         
 .count {
   color: $gray;
 }
 .likedCount {
   color: red;
+}
+.forwarded {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(42%) saturate(4774%) hue-rotate(88deg) brightness(111%) contrast(113%);
+}
+@media (min-width: 1200px) {
+  .container {
+    justify-content: center;
+    gap: 32px;
+  }
+  .button > img {
+    width: 24px;
+  }
+  .count {
+    font-size: 16px;
+    font-weight: 700;
+  }
 }

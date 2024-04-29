@@ -1,4 +1,11 @@
+@import '../../vars.scss';
+
 .container {
   margin: 0 24px;
   position: relative;
+}
+@media (min-width: 1200px) {
+  .container {
+    width: $desktop;
+  }
 }

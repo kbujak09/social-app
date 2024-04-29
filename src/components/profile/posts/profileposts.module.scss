@@ -1,3 +1,5 @@
+@import '../../../vars.scss';
+
 .loading {
   flex: 1;
   display: flex;
@@ -5,8 +7,25 @@
   align-items: center;
 }
 .container {
-  margin: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  padding: 12px 24px;
+}
+.empty {
+  font-size: 16px;
+  padding: 24px 16px;
+  background-color: $bg-dark;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  text-align: center;
+  font-weight: 700;
+}
+
+@media (min-width: 1200px) {
+  .empty {
+    font-size: 18px;
+    padding: 48px 16px;
+    margin-top: 12px;
+  }
 }

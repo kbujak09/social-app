@@ -71,7 +71,7 @@
 .question {
   text-align: center;
   font-size: 14px;
-  margin: 24px 0;
+  padding: 24px 0;
   letter-spacing: 0.5px;
 }
 .question > strong {
@@ -91,7 +91,7 @@
 
 @media (min-width: 1200px) {
   .title {
-    font-size: 28px;
+    font-size: 24px;
   }
   .form {
     gap: 36px;
@@ -101,15 +101,21 @@
     margin-top: 16px;
   }
   .input {
-    width: 420px;
+    width: 400px;
     font-size: 18px;
     padding: 4px 0;
     border-radius: 12px;
   }
+  .submit {
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .submit > input {
-    font-size: 18px;
     padding: 16px 0;
-    border-radius: 12px;
+    height: 100%;
+    font-size: 18px;
   }
   .question {
     font-size: 16px;

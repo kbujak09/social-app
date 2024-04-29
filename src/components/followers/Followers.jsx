@@ -12,7 +12,7 @@ const Followers = () => {
 
   const { userId } = useParams();
 
-  const { followers, fetchFollowers } = useContext(Context);
+  const { followers, fetchFollowers, currentProfile } = useContext(Context);
 
   let i = 0;
 
@@ -31,11 +31,16 @@ const Followers = () => {
     <>
       <SwipeBack/>
       <div className={styles.container}>
-        <div className={styles.title}>Followers</div>
+        <div className={styles.title}>{checkIsLocal() 
+          ? 'Your followers' 
+          : <div><span className={styles.username}>{currentProfile.username}</span> followers</div>}
+        </div>
         <div className={styles.followers}>
           {data && data.length > 0 && data.map(user => {
             return (
-              <User key={i++} user={user} isLocal={checkIsLocal()} isDelete={true} data={data} setData={setData}/>
+              <div className={styles.user}>
+                <User key={i++} user={user} isLocal={checkIsLocal()} isDelete={true} data={data} setData={setData}/>
+              </div>
             )
          })}
         </div>

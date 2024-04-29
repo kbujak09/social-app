@@ -23,4 +23,18 @@
 }
 .followers, .following {
   font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    margin: 24px 48px;
+  }
+  .userContainer {
+    gap: 12px;
+  }
+  .followers, .following {
+    font-size: 17px;
+  }
 }

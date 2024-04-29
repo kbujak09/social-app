@@ -6,9 +6,7 @@
   border-radius: 20px;
   padding: 16px;
   transition: height 1s ease;
-}
-.containerComment {
-  color: red;
+  border: 2px solid $logo;
 }
 .text {
   opacity: 0.8;
@@ -27,9 +25,10 @@
   padding-right: 36px;
   position: relative;
   font-family: 'Roboto', sans-serif;
+  border: 2px solid $logo;
 }
 .containerFocusedComment {
-  height: 84px;
+  height: 100px;
 }
 .textFocused {
   background-color: $bg-dark;
@@ -58,9 +57,21 @@
   font-size: 14px;
   text-align: center;
   letter-spacing: 0.8px;
-  color: $gray;
+  color: $logo;
   cursor: pointer;
 }
-.submit:hover {
-  color: $logo;
+
+@media (min-width: 1200px) {
+  .text, .textFocused {
+    font-size: 18px;
+  }
+  .submit {
+    font-size: 16px;
+  }
+  .closer {
+    font-size: 18px;
+  }
+  .text::placeholder {
+    font-size: 16px;
+  }
 }

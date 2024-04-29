@@ -12,9 +12,11 @@ const Following = () => {
 
   const { userId } = useParams();
 
-  const { fetchFollowing, following } = useContext(Context);
+  const { fetchFollowing, following, currentProfile } = useContext(Context);
 
   let i = 0;
+
+  const checkIsLocal = () => !userId ? true : false;
 
   useEffect(() => {
     if (userId) {
@@ -29,11 +31,16 @@ const Following = () => {
     data &&  <>
       <SwipeBack/>
       <div className={styles.container}>
-        <div className={styles.title}>People you follow</div>
+        <div className={styles.title}>{checkIsLocal() 
+          ? `People that you follow` 
+          : <div>People that <span className={styles.username}>{currentProfile.username}</span> follows</div>}
+        </div>
         <div className={styles.following}>
           {data && data.length > 0 && data.map(item => {
             return (
-              <User key={i++} user={item}/>
+              <div className={styles.user}>
+                <User key={i++} user={item}/>
+              </div>
             )
           })}
         </div>

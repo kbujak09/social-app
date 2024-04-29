@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 16px 0;
+  cursor: pointer;
 }
 .user {
   display: flex;
@@ -14,7 +15,7 @@
 .avatar > div > img {
   width: 40px;
 }
-.post {
+.post > .user > .username {
   color: $gray;
 }
 .post {
@@ -23,8 +24,37 @@
 .post > .user > .avatar > div > img {
   width: 32px;
 }
-.post > .user {
+.post > .user  {
   gap: 12px;
-  color: $gray;
   font-size: 14px;
+}
+.comment > .user > .avatar > div > img {
+  width: 28px;
+}
+.comment > .user {
+  gap: 8px;
+  font-size: 14px;
+}
+@media (min-width: 1200px) {
+  .username {
+    font-size: 18px;
+  }
+  .avatar > div > img {
+    width: 44px;
+  }
+  .post > .user > .avatar > div > img {
+    width: 40px;
+  }
+  .post > .user > .username {
+    font-size: 18px;
+  }
+  .comment > .user > .avatar > div > img {
+    width: 36px;
+  }
+  .comment > .user {
+    gap: 12px;
+  }
+  .comment > .user > .username {
+    font-size: 16px;
+  }
 }

@@ -1,0 +1,34 @@
+@import '../../../vars.scss';
+
+.container {
+  display: flex;
+  gap: 8px; 
+  align-items: center;
+  margin-left: 4px;
+}
+.icon, .liked {
+  width: 20px;
+}
+.count {
+  font-size: 15px;
+  color: $gray;
+}
+.icon {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(8%) saturate(0%) hue-rotate(231deg) brightness(103%) contrast(89%);
+}
+.liked {
+  filter: invert(11%) sepia(98%) saturate(6300%) hue-rotate(1deg) brightness(107%) contrast(112%);
+}
+
+@media (min-width: 1200px) {
+  .container {
+    gap: 12px;
+  }
+  .container > img {
+    width: 24px;
+  }
+  .count {
+    font-size: 16px;
+    font-weight: 700;
+  }
+}

@@ -1,8 +1,11 @@
+import { Context } from '../../contexts/context';
 import styles from './creator.module.scss';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
-const Creator = ({placeholder, submitText, isComment, maxLength, postId}) => {
+const Creator = ({placeholder, submitText, isComment, maxLength, postId, setState}) => {
+
+  const { posts, setPosts } = useContext(Context);
 
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
@@ -36,9 +39,24 @@ const createPost = async (e) => {
       body: JSON.stringify(payload)
     });
 
-    console.log(req);
-
     if (req) {
+      const json = await req.json();
+      if (setState) {
+        if (isComment) {
+          let updatedPosts = [];
+          for (let post of posts) {
+            if (post._id === postId) {
+              let updatedComments = [...post.comments, payload];
+              updatedPosts.push({...post, comments: updatedComments});
+            }
+            else {
+              updatedPosts.push(post);
+            }
+          }
+          setPosts(updatedPosts);
+        }
+        setState(prevData => [json, ...prevData]);
+      }
       closeCreator(e);
     }
   }

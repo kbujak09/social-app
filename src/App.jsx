@@ -11,7 +11,6 @@ import './App.scss';
 
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ReactLoading from 'react-loading';
 
 const App = () => {
 
@@ -21,6 +20,7 @@ const App = () => {
   const [following, setFollowing] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userPosts, setUserPosts] = useState([]);
+  const [currentProfile, setCurrentProfile] = useState();
   
   const fetchPosts = async (userId, cb) => {
     try {
@@ -52,16 +52,6 @@ const App = () => {
     }
   }
 
-  const fetchUserPosts = async (userId, cb) => {
-    try {
-      let res = await fetch(`http://localhost:5000/api/posts/${userId}`);
-      const data = await res.json();
-      cb(data);
-    } catch (err) {
-      console.error('Fetching local user posts failed: ', err);
-    }
-  }
-  
   const fetchData = async () => {
     if (localStorage.token) {
       try {
@@ -69,7 +59,6 @@ const App = () => {
           fetchPosts(localStorage.userId, setPosts),
           fetchFollowing(localStorage.userId, setFollowing),
           fetchFollowers(localStorage.userId, setFollowers),
-          fetchUserPosts(localStorage.userId, setUserPosts)
         ]);
         setUser(localStorage.token);
       } catch (err) {
@@ -78,12 +67,14 @@ const App = () => {
         setIsLoading(false);
       }
     }
-    setIsLoading(false);
+    else {
+      setIsLoading(false);
+    }
   }
   
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [localStorage.token]);
 
   if (isLoading) {
     return (
@@ -104,7 +95,10 @@ const App = () => {
                             fetchFollowers,
                             fetchPosts,
                             setPosts,
-                            userPosts
+                            userPosts,
+                            setUserPosts,
+                            currentProfile,
+                            setCurrentProfile
                             }}>
       <Routes>
         <Route path={'/login'} element={<NotLogged type={'login'}/>}/>

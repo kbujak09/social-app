@@ -1,23 +1,41 @@
 import styles from './profileposts.module.scss';
 import Post from '../../posts/post/Post';
 import { Context } from '../../../contexts/context';
+import Forward from '../../forward/Forward';
 
 import { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
+import { useParams } from 'react-router-dom';
 
 const ProfilePosts = () => {
 
+  let { userId } = useParams();
+
   const [isLoading, setIsLoading] = useState(true);
 
-  const { userPosts } = useContext(Context);
+  const [posts, setPosts] = useState();
 
-  useEffect(() => {
-    if (userPosts) {
-      setIsLoading(false);
-    }
-  }, []);
+  const isLocal = userId ? false : true;
 
   let key = 0;
+
+  const fetchProfilePosts = async () => {
+    try {
+      const req = await fetch(`http://localhost:5000/api/posts/${userId ? userId : localStorage.userId}`);
+
+      const data = await req.json()
+
+      setPosts(data);
+      setIsLoading(false);
+    }
+    catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchProfilePosts();
+  }, [])
 
   if (isLoading) {
     return (
@@ -29,8 +47,24 @@ const ProfilePosts = () => {
 
   return (
     <div className={styles.container}>
-      {userPosts.length > 0 && userPosts.reverse().map(post => {
-      return <Post data={post} key={key++}/>})
+      { posts && posts.length === 0 && isLocal &&
+        <div className={styles.empty}>
+          Post your thoughts and bring this profile to life!
+        </div>
+      }
+      { posts && posts.length === 0 && !isLocal &&
+        <div className={styles.empty}>
+          Seems like this profile is empty :(
+        </div>
+      }
+      {posts && posts.length > 0 && posts.map(post => {
+        if (post.text) {
+          return <Post data={post} key={key++}/>
+        }
+        else {
+          return <Forward data={post} key={key++}/>
+        }
+      })
       }
     </div>
   )
