@@ -1,18 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import styles from './mayknow.module.scss';
 import SwipeBack from '../swipeback/SwipeBack';
 import User from '../user/User';
+import { Context } from '../../contexts/context';
 
 const MayKnow = () => {
 
   const [data, setData] = useState();
 
+  const { bearer } = useContext(Context);
+
   let i = 0;
 
   const fetchUsers = async () => {
     try {
-      const data = await fetch(`http://localhost:5000/api/users/may-know?userId=${localStorage.userId}`);
+      const data = await fetch(`http://localhost:5000/api/users/may-know?userId=${localStorage.userId}`, {
+        headers: {
+          Authorization: bearer,
+        }
+      });
       const json = await data.json();
       setData(json)
     }

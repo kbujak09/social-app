@@ -5,7 +5,6 @@ import FollowButton from '../followbutton/FollowButton';
 import ProfilePosts from './posts/ProfilePosts';
 import Loader from '../loader/Loader';
 
-import ReactLoading from 'react-loading';
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '../../contexts/context';
@@ -14,7 +13,7 @@ const Profile = () => {
 
   let { userId } = useParams();
 
-  const { currentProfile ,setCurrentProfile } = useContext(Context);
+  const { currentProfile ,setCurrentProfile, bearer } = useContext(Context);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,7 +22,11 @@ const Profile = () => {
       if (!userId) {
         userId = localStorage.userId;
       }
-      const res = await fetch(`http://localhost:5000/api/users/${userId}`);
+      const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+        headers: {
+          Authorization: bearer,
+        }
+      });
       const user = await res.json();
       setCurrentProfile(user);
       setIsLoading(false);

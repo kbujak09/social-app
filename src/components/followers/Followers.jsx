@@ -25,7 +25,7 @@ const Followers = () => {
     else {
       setData(followers);
     }
-  }, [])
+  }, []);
 
   return (
     <>

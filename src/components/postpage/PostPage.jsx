@@ -14,7 +14,7 @@ const PostPage = () => {
 
   const { postId } = useParams();
   
-  const { posts, userPosts } = useContext(Context);
+  const { posts, userPosts, bearer } = useContext(Context);
 
   const allPosts = posts.concat(userPosts);
 
@@ -38,7 +38,11 @@ const PostPage = () => {
   };
 
   const getComments = async () => {
-    const req = await fetch(`http://localhost:5000/api/posts/${postId}/comments`);
+    const req = await fetch(`http://localhost:5000/api/posts/${postId}/comments`, {
+      headers: {
+        'Authorization': bearer
+      }
+    });
 
     if (req.ok) {
       return setComments(await req.json());

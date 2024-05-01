@@ -52,6 +52,7 @@
 
 @media (min-width: 1200px) {
   .content {
+    animation: slideIn 0.7s ease-in-out;
     position: absolute;
     top: 0;
     right: 0;

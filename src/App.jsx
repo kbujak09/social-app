@@ -21,10 +21,17 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userPosts, setUserPosts] = useState([]);
   const [currentProfile, setCurrentProfile] = useState();
+
+  const token = localStorage.getItem("token");
+  const bearer = `Bearer ${token}`;
   
   const fetchPosts = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/posts?userId=${userId}`);
+      const res = await fetch(`http://localhost:5000/api/posts?userId=${userId}`, {
+        headers: {
+          Authorization: bearer,
+        }
+      });
       const data = await res.json();
       cb(data);
     } catch (err) {
@@ -34,7 +41,11 @@ const App = () => {
   
   const fetchFollowing = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}/following`);
+      const res = await fetch(`http://localhost:5000/api/users/${userId}/following`, {
+        headers: {
+          Authorization: bearer,
+        }
+      })
       const data = await res.json();
       cb(data);
     } catch (err) {
@@ -44,7 +55,11 @@ const App = () => {
   
   const fetchFollowers = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}/followers`);
+      const res = await fetch(`http://localhost:5000/api/users/${userId}/followers`, {
+        headers: {
+          Authorization: bearer,
+        }
+      })
       const data = await res.json();
       cb(data);
     } catch (err) {
@@ -98,7 +113,8 @@ const App = () => {
                             userPosts,
                             setUserPosts,
                             currentProfile,
-                            setCurrentProfile
+                            setCurrentProfile,
+                            bearer
                             }}>
       <Routes>
         <Route path={'/login'} element={<NotLogged type={'login'}/>}/>

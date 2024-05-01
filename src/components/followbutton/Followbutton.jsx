@@ -4,13 +4,13 @@ import { Context } from '../../contexts/context';
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
-const FollowButton = ({userId, size, isDelete, data }) => {
+const FollowButton = ({userId, size, isDelete, data, setData}) => {
 
   const profileId = useParams(userId);
 
   const [isFollowed, setIsFollowed] = useState(undefined);
 
-  const { following, setFollowing, fetchPosts, setPosts, setFollowers } = useContext(Context);
+  const { following, setFollowing, fetchPosts, setPosts, setFollowers, bearer } = useContext(Context);
 
   const isLocal = () => userId === localStorage.userId ? true : false;
 
@@ -32,7 +32,10 @@ const FollowButton = ({userId, size, isDelete, data }) => {
   const updateFollow = async () => {
     if (checkIsFollowed()) {
       const res = await fetch(`http://localhost:5000/api/users/${localStorage.userId}/following?followedId=${userId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Authorization': bearer
+        }
       });
       if (res.ok) {
         deleteFollow(userId);
@@ -42,7 +45,10 @@ const FollowButton = ({userId, size, isDelete, data }) => {
       return console.error('Unfollowing failed!');
     }
     const res = await fetch(`http://localhost:5000/api/users/${localStorage.userId}/following?followedId=${userId}`, {
-      method: 'POST'
+      method: 'POST',
+      headers: {
+        'Authorization': bearer
+      }
     });
     if (res.ok) {
       const json = await res.json();
@@ -59,11 +65,15 @@ const FollowButton = ({userId, size, isDelete, data }) => {
   const removeFollower = async () => {
     try {
       const req = await fetch(`http://localhost:5000/api/users/${localStorage.userId}?followerId=${userId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Authorization': bearer
+        }
       });
 
       if (req.ok) {
         const newFollowers = data.filter(item => item._id !== userId)
+        setData(newFollowers);
         setFollowers(newFollowers);
       }
     }
