@@ -2,7 +2,7 @@ import styles from './likecomment.module.scss';
 import like from '../../../assets/like.svg';
 import like_fill from '../../../assets/like_fill.svg';
 import { likeSwitch } from '../../../utils/utils';
-import { CommentContext } from '../../../contexts/context';
+import { CommentContext, Context } from '../../../contexts/context';
 
 import { useContext, useEffect, useState } from 'react';
 
@@ -10,9 +10,11 @@ const LikeComment = ({data, setData, commentId}) => {
 
   const { comments, setComments } = useContext(CommentContext);
 
+  const { ip } = useContext(Context);
+
   const [liked, setLiked] = useState(false);
 
-  const handleLikeSwitch = () => likeSwitch(comments, setComments, data, setData, liked, setLiked, commentId,`http://localhost:5000/api/comments/${commentId}?userId=${localStorage.userId}`);
+  const handleLikeSwitch = () => likeSwitch(comments, setComments, data, setData, liked, setLiked, commentId,`http://${ip}/api/comments/${commentId}?userId=${localStorage.userId}`);
 
   useEffect(() => {
     if (data.likes && data.likes.includes(localStorage.userId)) {

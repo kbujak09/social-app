@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 
 const Creator = ({placeholder, submitText, isComment, maxLength, postId, setState}) => {
 
-  const { posts, setPosts, bearer } = useContext(Context);
+  const { posts, setPosts, bearer, ip } = useContext(Context);
 
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
@@ -31,7 +31,7 @@ const createPost = async (e) => {
       text: value
     }
 
-    const req = await fetch(`${isComment ? `http://localhost:5000/api/posts/${postId}/comment` : 'http://localhost:5000/api/posts'}`, {
+    const req = await fetch(`${isComment ? `http://${ip}/api/posts/${postId}/comment` : `http://${ip}/api/posts`}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

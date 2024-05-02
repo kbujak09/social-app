@@ -14,6 +14,8 @@ import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
 
+  const ip = '13.51.48.41:5000';
+
   const [user, setUser] = useState('');
   const [posts, setPosts] = useState([]);
   const [followers, setFollowers] = useState([]);
@@ -27,7 +29,7 @@ const App = () => {
   
   const fetchPosts = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/posts?userId=${userId}`, {
+      const res = await fetch(`http://${ip}/api/posts?userId=${userId}`, {
         headers: {
           Authorization: bearer,
         }
@@ -41,7 +43,7 @@ const App = () => {
   
   const fetchFollowing = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}/following`, {
+      const res = await fetch(`http://${ip}/api/users/${userId}/following`, {
         headers: {
           Authorization: bearer,
         }
@@ -55,7 +57,7 @@ const App = () => {
   
   const fetchFollowers = async (userId, cb) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/users/${userId}/followers`, {
+      const res = await fetch(`http://${ip}/api/users/${userId}/followers`, {
         headers: {
           Authorization: bearer,
         }
@@ -114,7 +116,8 @@ const App = () => {
                             setUserPosts,
                             currentProfile,
                             setCurrentProfile,
-                            bearer
+                            bearer,
+                            ip
                             }}>
       <Routes>
         <Route path={'/login'} element={<NotLogged type={'login'}/>}/>

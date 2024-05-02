@@ -11,7 +11,7 @@ const ProfilePosts = () => {
 
   let { userId } = useParams();
 
-  const { bearer } = useContext(Context)
+  const { bearer, ip } = useContext(Context)
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,7 +23,7 @@ const ProfilePosts = () => {
 
   const fetchProfilePosts = async () => {
     try {
-      const req = await fetch(`http://localhost:5000/api/posts/${userId ? userId : localStorage.userId}`, {
+      const req = await fetch(`http://${ip}/api/posts/${userId ? userId : localStorage.userId}`, {
         headers: {
           Authorization: bearer,
         }

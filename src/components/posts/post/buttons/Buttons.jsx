@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 const Buttons = ({data, setData, postId, author, post, isForward}) => {
 
-  const { setPosts, posts, bearer } = useContext(Context);
+  const { setPosts, posts, bearer, ip } = useContext(Context);
 
   const [liked, setLiked] = useState();
 
@@ -31,7 +31,7 @@ const Buttons = ({data, setData, postId, author, post, isForward}) => {
     isNotNavigated(`/post/${postId}`);
   }
 
-  const handleLikeSwitch = () => likeSwitch(posts, setPosts, data, setData, liked, setLiked, postId, `http://localhost:5000/api/posts/${postId}/likes?userId=${localStorage.userId}`);
+  const handleLikeSwitch = () => likeSwitch(posts, setPosts, data, setData, liked, setLiked, postId, `http://${ip}/api/posts/${postId}/likes?userId=${localStorage.userId}`);
 
   const handleForwardSwitch = async () => {
     try {
@@ -63,7 +63,7 @@ const Buttons = ({data, setData, postId, author, post, isForward}) => {
         forwards: updatedForwards
       }));
 
-      await fetch(`http://localhost:5000/api/posts/${postId}/forward?userId=${localStorage.userId}`, {
+      await fetch(`http://${ip}/api/posts/${postId}/forward?userId=${localStorage.userId}`, {
         method: 'POST',
           headers: {
             Authorization: bearer,

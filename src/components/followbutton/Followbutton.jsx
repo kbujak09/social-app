@@ -10,7 +10,7 @@ const FollowButton = ({userId, size, isDelete, data, setData}) => {
 
   const [isFollowed, setIsFollowed] = useState(undefined);
 
-  const { following, setFollowing, fetchPosts, setPosts, setFollowers, bearer } = useContext(Context);
+  const { following, setFollowing, fetchPosts, setPosts, setFollowers, bearer, ip } = useContext(Context);
 
   const isLocal = () => userId === localStorage.userId ? true : false;
 
@@ -31,7 +31,7 @@ const FollowButton = ({userId, size, isDelete, data, setData}) => {
 
   const updateFollow = async () => {
     if (checkIsFollowed()) {
-      const res = await fetch(`http://localhost:5000/api/users/${localStorage.userId}/following?followedId=${userId}`, {
+      const res = await fetch(`http://${ip}/api/users/${localStorage.userId}/following?followedId=${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': bearer
@@ -44,7 +44,7 @@ const FollowButton = ({userId, size, isDelete, data, setData}) => {
       }
       return console.error('Unfollowing failed!');
     }
-    const res = await fetch(`http://localhost:5000/api/users/${localStorage.userId}/following?followedId=${userId}`, {
+    const res = await fetch(`http://${ip}/api/users/${localStorage.userId}/following?followedId=${userId}`, {
       method: 'POST',
       headers: {
         'Authorization': bearer
@@ -64,7 +64,7 @@ const FollowButton = ({userId, size, isDelete, data, setData}) => {
 
   const removeFollower = async () => {
     try {
-      const req = await fetch(`http://localhost:5000/api/users/${localStorage.userId}?followerId=${userId}`, {
+      const req = await fetch(`http://${ip}/api/users/${localStorage.userId}?followerId=${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': bearer

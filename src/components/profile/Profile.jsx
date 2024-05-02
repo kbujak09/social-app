@@ -13,7 +13,7 @@ const Profile = () => {
 
   let { userId } = useParams();
 
-  const { currentProfile ,setCurrentProfile, bearer } = useContext(Context);
+  const { currentProfile ,setCurrentProfile, bearer, ip } = useContext(Context);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,7 +22,7 @@ const Profile = () => {
       if (!userId) {
         userId = localStorage.userId;
       }
-      const res = await fetch(`http://localhost:5000/api/users/${userId}`, {
+      const res = await fetch(`http://${ip}/api/users/${userId}`, {
         headers: {
           Authorization: bearer,
         }

@@ -13,12 +13,13 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const [isShaking, setIsShaking] = useState(false);
 
-  const { setUser } = useContext(Context);
+  const { setUser, ip } = useContext(Context);
 
   const logIn = async (e) => {
+    
     e.preventDefault();
     try {
-      let req = await fetch('http://localhost:5000/api/login', {
+      let req = await fetch(`http://${ip}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
