@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/social-app/static/css/main.397960f3.css",
-    "main.js": "/social-app/static/js/main.9163df2f.js",
+    "main.css": "/social-app/static/css/main.53fdb235.css",
+    "main.js": "/social-app/static/js/main.cf19e66b.js",
     "static/media/Roboto-Regular.ttf": "/social-app/static/media/Roboto-Regular.fc2b5060f7accec5cf74.ttf",
     "static/media/avatar8.webp": "/social-app/static/media/avatar8.4d81ebdd321665a416da.webp",
     "static/media/avatar7.webp": "/social-app/static/media/avatar7.7adeca38fbd86f7f6285.webp",
@@ -20,11 +20,11 @@
     "static/media/forward.svg": "/social-app/static/media/forward.e6455e31729fffa72b025119054bdad0.svg",
     "static/media/arrow_back.svg": "/social-app/static/media/arrow_back.ee8a5e56dde635f226a87d7c7118134f.svg",
     "static/media/menu.webp": "/social-app/static/media/menu.dd9065b98c2590ac88ee.webp",
-    "main.397960f3.css.map": "/social-app/static/css/main.397960f3.css.map",
-    "main.9163df2f.js.map": "/social-app/static/js/main.9163df2f.js.map"
+    "main.53fdb235.css.map": "/social-app/static/css/main.53fdb235.css.map",
+    "main.cf19e66b.js.map": "/social-app/static/js/main.cf19e66b.js.map"
   },
   "entrypoints": [
-    "static/css/main.397960f3.css",
-    "static/js/main.9163df2f.js"
+    "static/css/main.53fdb235.css",
+    "static/js/main.cf19e66b.js"
   ]
 }
