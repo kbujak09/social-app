@@ -13,7 +13,7 @@ const Homepage = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { setPosts } = useContext(Context);
+  const { setPosts, posts } = useContext(Context);
 
   return (
     <div className={styles.container}>
@@ -24,6 +24,7 @@ const Homepage = () => {
         isComment={false}
         maxLength={120}
         setState={setPosts}
+        state={posts}
       />
       <MayKnowNavigate /> 
       <Posts />

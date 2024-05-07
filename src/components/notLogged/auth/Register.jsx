@@ -1,10 +1,15 @@
 import styles from './auth.module.scss';
+import { Context } from '../../../contexts/context';
+
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
 
 const Register = () => {
 
   const navigate = useNavigate();
+
+  const { ip } = useContext(Context);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -14,9 +19,8 @@ const Register = () => {
 
   const signUp = async (e) => {
     e.preventDefault();
-
     try {
-      let req = await fetch('http://localhost:5000/api/signup', {
+      let req = await fetch(`${ip}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

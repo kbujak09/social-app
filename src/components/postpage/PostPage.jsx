@@ -38,7 +38,7 @@ const PostPage = () => {
   };
 
   const getComments = async () => {
-    const req = await fetch(`http://${ip}/api/posts/${postId}/comments`, {
+    const req = await fetch(`${ip}/api/posts/${postId}/comments`, {
       headers: {
         'Authorization': bearer
       }
@@ -72,16 +72,17 @@ const PostPage = () => {
     <>
       <SwipeBack />
       <div className={styles.container}>
-        <Post data={post}/>
-        <Creator 
-          placeholder={"Share your thoughts!"}
-          submitText={"COMMENT"}
-          isComment={true}
-          maxLength={70}
-          postId={postId}
-          setState={setComments}
-        />
-        <CommentContext.Provider value={{comments, setComments}}>
+        <Post data={post} commentsLength={comments ? comments.length : 0}/>
+        <CommentContext.Provider value={{comments, setComments, post}}>
+          <Creator 
+            placeholder={"Share your thoughts!"}
+            submitText={"COMMENT"}
+            isComment={true}
+            maxLength={70}
+            postId={postId}
+            setState={setComments}
+            state={comments}
+          />
           <CommentsList />
         </CommentContext.Provider>
       </div>

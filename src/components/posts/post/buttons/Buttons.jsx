@@ -9,7 +9,7 @@ import { likeSwitch } from '../../../../utils/utils';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const Buttons = ({data, setData, postId, author, post, isForward}) => {
+const Buttons = ({data, setData, postId, author, post, isForward, commentsLength}) => {
 
   const { setPosts, posts, bearer, ip } = useContext(Context);
 
@@ -31,7 +31,7 @@ const Buttons = ({data, setData, postId, author, post, isForward}) => {
     isNotNavigated(`/post/${postId}`);
   }
 
-  const handleLikeSwitch = () => likeSwitch(posts, setPosts, data, setData, liked, setLiked, postId, `http://${ip}/api/posts/${postId}/likes?userId=${localStorage.userId}`);
+  const handleLikeSwitch = () => likeSwitch(posts, setPosts, data, setData, liked, setLiked, postId, `${ip}/api/posts/${postId}/likes?userId=${localStorage.userId}`, bearer);
 
   const handleForwardSwitch = async () => {
     try {
@@ -63,7 +63,7 @@ const Buttons = ({data, setData, postId, author, post, isForward}) => {
         forwards: updatedForwards
       }));
 
-      await fetch(`http://${ip}/api/posts/${postId}/forward?userId=${localStorage.userId}`, {
+      await fetch(`${ip}/api/posts/${postId}/forward?userId=${localStorage.userId}`, {
         method: 'POST',
           headers: {
             Authorization: bearer,
@@ -98,7 +98,7 @@ const Buttons = ({data, setData, postId, author, post, isForward}) => {
     </div>
     <div onClick={navigateToComments} className={styles.button}>
       <img className={styles.icon} src={comment} alt="comment" />
-      <div className={styles.count}>{data.comments ? data.comments.length : 0}</div>
+      <div className={styles.count}>{commentsLength ? commentsLength : post.comments.length}</div>
     </div>
     <div className={styles.button} onClick={handleForwardSwitch}>
       <img className={isForwarded ? `${styles.icon} ${styles.forwarded}` : `${styles.icon}`} src={forward} alt="forward"/>

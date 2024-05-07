@@ -3,12 +3,13 @@ import styles from './creator.module.scss';
 
 import { useContext, useState } from 'react';
 
-const Creator = ({placeholder, submitText, isComment, maxLength, postId, setState}) => {
+const Creator = ({placeholder, submitText, isComment, maxLength, postId, setState, commentsCount, state}) => {
 
   const { posts, setPosts, bearer, ip } = useContext(Context);
 
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
+  const [isCreating, setIsCreating] = useState(false);
 
   const openCreator = () => {
     setIsOpen(true);
@@ -21,8 +22,10 @@ const Creator = ({placeholder, submitText, isComment, maxLength, postId, setStat
   }
 
 const createPost = async (e) => {
-  e.preventDefault();
+  if (!isCreating) {
+    e.preventDefault();
   try {
+    setIsCreating(true);
     if (!value) {
       return;
     }
@@ -31,7 +34,7 @@ const createPost = async (e) => {
       text: value
     }
 
-    const req = await fetch(`${isComment ? `http://${ip}/api/posts/${postId}/comment` : `http://${ip}/api/posts`}`, {
+    const req = await fetch(`${isComment ? `${ip}/api/posts/${postId}/comment` : `${ip}/api/posts`}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,13 +59,16 @@ const createPost = async (e) => {
           }
           setPosts(updatedPosts);
         }
-        setState(prevData => [json, ...prevData]);
+        const newData = [json, ...state];
+        setState(newData);
       }
+      setIsCreating(false);
       closeCreator(e);
     }
   }
   catch (err) {
     console.error(err);
+  }
   }
 };
 

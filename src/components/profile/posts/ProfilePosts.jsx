@@ -23,7 +23,7 @@ const ProfilePosts = () => {
 
   const fetchProfilePosts = async () => {
     try {
-      const req = await fetch(`http://${ip}/api/posts/${userId ? userId : localStorage.userId}`, {
+      const req = await fetch(`${ip}/api/posts/${userId ? userId : localStorage.userId}`, {
         headers: {
           Authorization: bearer,
         }

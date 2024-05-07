@@ -15,7 +15,7 @@ const MayKnow = () => {
 
   const fetchUsers = async () => {
     try {
-      const data = await fetch(`http://${ip}/api/users/may-know?userId=${localStorage.userId}`, {
+      const data = await fetch(`${ip}/api/users/may-know?userId=${localStorage.userId}`, {
         headers: {
           Authorization: bearer,
         }

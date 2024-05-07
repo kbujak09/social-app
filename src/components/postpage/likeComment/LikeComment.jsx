@@ -10,11 +10,11 @@ const LikeComment = ({data, setData, commentId}) => {
 
   const { comments, setComments } = useContext(CommentContext);
 
-  const { ip } = useContext(Context);
+  const { ip, bearer } = useContext(Context);
 
   const [liked, setLiked] = useState(false);
 
-  const handleLikeSwitch = () => likeSwitch(comments, setComments, data, setData, liked, setLiked, commentId,`http://${ip}/api/comments/${commentId}?userId=${localStorage.userId}`);
+  const handleLikeSwitch = () => likeSwitch(comments, setComments, data, setData, liked, setLiked, commentId,`${ip}/api/comments/${commentId}?userId=${localStorage.userId}`, bearer);
 
   useEffect(() => {
     if (data.likes && data.likes.includes(localStorage.userId)) {

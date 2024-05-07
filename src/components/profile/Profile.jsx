@@ -22,7 +22,7 @@ const Profile = () => {
       if (!userId) {
         userId = localStorage.userId;
       }
-      const res = await fetch(`http://${ip}/api/users/${userId}`, {
+      const res = await fetch(`${ip}/api/users/${userId}`, {
         headers: {
           Authorization: bearer,
         }
@@ -43,7 +43,7 @@ const Profile = () => {
   if (isLoading) {
     return (
       <>
-        <Loader />
+        <Loader sb={false}/>
       </>
     )
   }

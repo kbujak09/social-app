@@ -5,10 +5,10 @@ import ReactLoading from 'react-loading';
 
 const Loader = ({sb=true}) => {
   return (
-    <div className={styles.loadingOuter}>
+    ReactLoading && <div className={styles.loadingOuter}>
       {sb && <SwipeBack/>}
       <div className={styles.loadingInner}>
-        <ReactLoading width='48px' type='spin'/>
+        <ReactLoading type='spin' width={'48px'}/>
       </div>
     </div>
   )

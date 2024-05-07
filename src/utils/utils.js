@@ -1,7 +1,4 @@
-const token = localStorage.getItem('token');
-const bearer = `Bearer ${token}`;
-
-const likeSwitch = async (array, setArray, data, setData, state, setState, id, api) => {
+const likeSwitch = async (array, setArray, data, setData, state, setState, id, api, bearer) => {
   try {
     let updatedLikes; 
 
@@ -33,20 +30,23 @@ const likeSwitch = async (array, setArray, data, setData, state, setState, id, a
       return item;
     });
 
-    setArray(updatedItems);
-
-    setData(prevData => ({
-      ...prevData, likes: updatedLikes
-    }));
-
-    setState(!state);
-
-    await fetch(api, {
+    const req = await fetch(api, {
       method: 'POST',
       headers: {
         'Authorization': bearer
       }
     });
+
+    if (req.ok) {
+      setArray(updatedItems);
+
+      setData(prevData => ({
+        ...prevData, likes: updatedLikes
+      }));
+
+      setState(!state);
+    }
+
   }
   catch (err) {
     console.error(err.message);

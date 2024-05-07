@@ -14,22 +14,23 @@ import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
 
-  const ip = '13.51.48.41:5000';
+  let token = localStorage.getItem("token");
+  let bearer = `Bearer ${token}`;
+
+  const ip = 'https://social-app-api.fly.dev';
 
   const [user, setUser] = useState('');
-  const [posts, setPosts] = useState([]);
-  const [followers, setFollowers] = useState([]);
-  const [following, setFollowing] = useState([]);
+  const [posts, setPosts] = useState();
+  const [followers, setFollowers] = useState();
+  const [following, setFollowing] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [userPosts, setUserPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState();
   const [currentProfile, setCurrentProfile] = useState();
-
-  const token = localStorage.getItem("token");
-  const bearer = `Bearer ${token}`;
+  const [isError, setIsError] = useState(false);
   
   const fetchPosts = async (userId, cb) => {
     try {
-      const res = await fetch(`http://${ip}/api/posts?userId=${userId}`, {
+      const res = await fetch(`${ip}/api/posts?userId=${userId}`, {
         headers: {
           Authorization: bearer,
         }
@@ -38,12 +39,13 @@ const App = () => {
       cb(data);
     } catch (err) {
       console.error('Fetching posts failed: ', err);
+      setIsError(true);
     }
   }
   
   const fetchFollowing = async (userId, cb) => {
     try {
-      const res = await fetch(`http://${ip}/api/users/${userId}/following`, {
+      const res = await fetch(`${ip}/api/users/${userId}/following`, {
         headers: {
           Authorization: bearer,
         }
@@ -52,12 +54,13 @@ const App = () => {
       cb(data);
     } catch (err) {
       console.error('Fetching followed users failed: ', err);
+      setIsError(true);
     }
   }
   
   const fetchFollowers = async (userId, cb) => {
     try {
-      const res = await fetch(`http://${ip}/api/users/${userId}/followers`, {
+      const res = await fetch(`${ip}/api/users/${userId}/followers`, {
         headers: {
           Authorization: bearer,
         }
@@ -66,6 +69,7 @@ const App = () => {
       cb(data);
     } catch (err) {
       console.error('Fetching followers failed: ', err);
+      setIsError(true);
     }
   }
 
@@ -80,7 +84,10 @@ const App = () => {
         setUser(localStorage.token);
       } catch (err) {
         console.error('Error fetching data:', err);
+        setIsError(true);
       } finally {
+        token = localStorage.getItem("token");
+        bearer = `Bearer ${token}`;
         setIsLoading(false);
       }
     }
@@ -95,7 +102,15 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <Loader sb={false}/>
+        <Loader sb={false}/>
+    )
+  }
+
+  if (isError && !isLoading) {
+    return (
+      <div className="error">
+        Fetching data error!
+      </div>
     )
   }
 

@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { DateTime } from "luxon";
 import { useNavigate } from 'react-router-dom';
 
-const Post = ({data, isForward}) => {
+const Post = ({data, isForward, commentsLength}) => {
 
   const [buttonsData, setButtonsData] = useState({});
 
@@ -40,7 +40,7 @@ const Post = ({data, isForward}) => {
         </div>  }                                  
       </div>
       <div className={styles.text}>{data.text}</div>
-      {!isForward && <Buttons post={data} data={buttonsData} setData={setButtonsData} postId={data._id} author={data.author._id}/>}
+      {!isForward && <Buttons post={data} data={buttonsData} setData={setButtonsData} postId={data._id} author={data.author._id} commentsLength={commentsLength}/>}
     </div>
   )
 };
