@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 import { useParams } from 'react-router-dom';
 
-const ProfilePosts = () => {
+const ProfilePosts = ({isFollowed}) => {
 
   let { userId } = useParams();
 
@@ -53,17 +53,23 @@ const ProfilePosts = () => {
 
   return (
     <div className={styles.container}>
-      { posts && posts.length === 0 && isLocal &&
+      {
+        !isFollowed && !isLocal &&
+        <div className={styles.empty}>
+          Follow this profile to see posts!
+        </div>
+      }
+      {isFollowed && posts && posts.length === 0 && isLocal &&
         <div className={styles.empty}>
           Post your thoughts and bring this profile to life!
         </div>
       }
-      { posts && posts.length === 0 && !isLocal &&
+      {isFollowed && posts && posts.length === 0 && !isLocal &&
         <div className={styles.empty}>
           Seems like this profile is empty :(
         </div>
       }
-      {posts && posts.length > 0 && posts.map(post => {
+      {isFollowed && posts && posts.length > 0 && posts.map(post => {
         if (post.text) {
           return <Post data={post} key={key++}/>
         }

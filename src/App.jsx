@@ -7,6 +7,7 @@ import Followers from './components/followers/Followers';
 import MayKnow from './components/mayknow/MayKnow';
 import PostPage from './components/postpage/PostPage';
 import Loader from './components/loader/Loader';
+import Error from './components/error/Error';
 import './App.scss';                  
 
 import { useState, useEffect } from 'react';
@@ -146,6 +147,7 @@ const App = () => {
         <Route path={'/user/:userId'} element={<Profile/>}/>
         <Route path={'/post/:postId'} element={<PostPage/>}/>
         <Route path={'/'} element={!user && !isLoading ? <NotLogged type={'greeting'}/> : <Homepage/>} exact/>
+        <Route path={'*'} element={<Error/>}/>
       </Routes>
     </Context.Provider>
   )
