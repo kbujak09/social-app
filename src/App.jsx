@@ -20,7 +20,7 @@ const App = () => {
 
   // const ip = 'https://social-app-api.fly.dev';
 
-  const ip = 'https://social-app-api-henna.vercel.app';
+  const ip = 'https://social-app-api-1el4.vercel.app/';
 
   const [user, setUser] = useState('');
   const [posts, setPosts] = useState();
