@@ -18,7 +18,9 @@ const App = () => {
   let token = localStorage.getItem("token");
   let bearer = `Bearer ${token}`;
 
-  const ip = 'https://social-app-api.fly.dev';
+  // const ip = 'https://social-app-api.fly.dev';
+
+  const ip = 'https://social-app-api-henna.vercel.app';
 
   const [user, setUser] = useState('');
   const [posts, setPosts] = useState();
