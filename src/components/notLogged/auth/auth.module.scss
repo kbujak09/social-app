@@ -20,6 +20,11 @@
     transform: translateX(0);
   }
 }
+.container {
+  padding: 0 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
 .formCell {
   display: flex;
   flex-direction: column;
@@ -32,14 +37,13 @@
   padding: 28px 0;
 }
 .input {
-  height: 36px;
-  border-radius: 20px;
+  height: 42px;
+  border-radius: 24px;
   font-weight: 400;
   border: 0;  
-  width: 220px;
+  width: 100%;
   border: 2px solid transparent;
   font-size: 16px;
-  padding: 0 16px;
   color: $bg-main;
   letter-spacing: 0.5px;
   text-align: center;
@@ -50,18 +54,18 @@
 }
 .title {
   text-align: center;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
 }
 .submit {
   text-align: center;
 }
 .submit > input, .submit > div {
-  height: 40px;
+  height: 48px;
   background-color: $logo;
   border: 0;
-  border-radius: 20px;
+  border-radius: 24px;
   width: 100%;
   font-size: 16px;
   font-weight: 700;
@@ -88,21 +92,32 @@
 .shake {
   animation: shake 0.3s ease-in-out
 }
-.anonymous {
-  margin-top: 16px;
-}
 .anonymous > div {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: $bg-dark;
   color: $logo;
-  border: 2px solid $logo;
+  border: 1px solid $logo;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 600px;
+  }
 }
 
 @media (min-width: 1200px) {
+  .container {
+    max-width: 600px;
+  }
   .title {
-    font-size: 24px;
+    font-size: 32px;
   }
   .form {
     gap: 36px;
@@ -112,13 +127,12 @@
     margin-top: 16px;
   }
   .input {
-    width: 400px;
     font-size: 18px;
     padding: 4px 0;
-    border-radius: 20px;
+    border-radius: 24px;
   }
   .submit {
-    border-radius: 5px;
+    border-radius: 24px;
     display: flex;
     justify-content: center;
     align-items: center;

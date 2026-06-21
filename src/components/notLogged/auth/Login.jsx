@@ -84,8 +84,7 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.container}>
-      <div className={styles.title}>Log in</div>
+      <div className={styles.title}>Welcome back</div>
       <form onSubmit={(e) => {logIn(e, username, password); setIsShaking(true); turnOffShake()}} id='login' className={styles.form}>
         <div className={styles.formCell}>
           <label className={styles.label} htmlFor="login-username"></label>
@@ -96,17 +95,18 @@ const Login = () => {
           <input onChange={(e) => setPassword(e.target.value)} className={styles.input} placeholder='Password' name='login-password' type="password" required/>
         </div>
       </form>
-      <div className={styles.submit}>
-        <input type="submit" value='Log in' form='login'/>
-      </div>
-      <div className={`${styles.submit} ${styles.anonymous}`}>
-        <div onClick={(e) => {createAnonymousUser(e); turnOffShake()}}>Generate Random Account</div>
+      <div className={styles.actions}>
+        <div className={styles.submit}>
+          <input type="submit" value='Log in' form='login'/>
+        </div>
+        <div className={`${styles.submit} ${styles.anonymous}`}>
+          <div onClick={(e) => {createAnonymousUser(e); turnOffShake()}}>Generate Random Account</div>
+        </div>
       </div>
       <div className={styles.question}>
         Don't have an account? <strong onClick={() => navigate('/signup')}>Sign up</strong>
       </div>
       <div className={`${styles.message} ${isShaking ? styles.shake : null}`}>{message}</div>
-    </div>
     </div>
   )
 };
