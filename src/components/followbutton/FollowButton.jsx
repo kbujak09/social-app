@@ -40,7 +40,7 @@ const FollowButton = ({userId, size, isDelete, data, setData, setIsFollowedProfi
       if (res.ok) {
         deleteFollow(userId);
         fetchPosts(localStorage.userId, setPosts);
-        setIsFollowedProfile(false);
+        setIsFollowedProfile?.(false);
         return setIsFollowed(false);
       }
       return console.error('Unfollowing failed!');
@@ -54,11 +54,9 @@ const FollowButton = ({userId, size, isDelete, data, setData, setIsFollowedProfi
     if (res.ok) {
       const json = await res.json();
       const user = json.user;
-      const newFollowing = following;
-      newFollowing.push(user);
-      setFollowing(newFollowing);
+      setFollowing([...following, user]);
       fetchPosts(localStorage.userId, setPosts);
-      setIsFollowedProfile(true);
+      setIsFollowedProfile?.(true);
       return setIsFollowed(true);
     }
     return console.error('Following failed!')
